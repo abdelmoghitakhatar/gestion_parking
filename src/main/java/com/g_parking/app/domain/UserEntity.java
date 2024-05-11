@@ -12,6 +12,8 @@ import java.io.Serializable;
 @Data
 public class UserEntity implements Serializable {
 
+    private static final long serialVersionUID = -4237606748612106119L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
