@@ -7,9 +7,9 @@ import com.g_parking.app.repository.UserRepository;
 import com.g_parking.app.service.UserService;
 import com.g_parking.app.service.mapper.UserMapper;
 import com.g_parking.app.web.utils.UserUtils;
-import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -38,11 +38,9 @@ public class UserServiceImpl implements UserService{
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         UserEntity user = userMapper.toEntity(userDTO);
-
         user = userRepository.save(user);
 
         UserResponse response = new UserResponse();
-
         return response.dtoToResponse(userMapper.toDto(user));
     }
 
