@@ -1,5 +1,6 @@
-package com.g_parking.app.dto;
+package com.g_parking.app.dto.customResponse;
 
+import com.g_parking.app.dto.UserDTO;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
@@ -11,19 +12,16 @@ import java.io.Serial;
 import java.io.Serializable;
 
 @Data
-public class UserDTO implements Serializable {
+public class UserResponse implements Serializable {
 
     @Serial
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private static final long serialVersionUID = 8051133884476414164L;
-
-    private Long id;
+    private static final long serialVersionUID = -2210159572741327166L;
 
     private String generatedId;
 
     @NotNull
-    @Size(min = 5, max = 254)
     private String email;
 
     @NotNull
@@ -34,7 +32,11 @@ public class UserDTO implements Serializable {
     @Size(min = 3, max = 25)
     private String lastName;
 
-    @NotNull
-    private String password;
-
+    public UserResponse dtoToResponse(UserDTO userDTO){
+        this.setGeneratedId(userDTO.getGeneratedId());
+        this.setEmail(userDTO.getEmail());
+        this.setFirstName(userDTO.getFirstName());
+        this.setLastName(userDTO.getLastName());
+        return this;
+    }
 }
