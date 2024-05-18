@@ -1,6 +1,14 @@
 # Spring Security Application
 
-### Description (beta)
-This is a web application (springboot) with Java 17, 
-this app is for parking management.
+## Important pour démarrer le projet
 
+- installet java 17 
+- installer nodejs 16.17.0
+
+---
+### Après le téléchargement de projet, lancer les commandes suivantes :
+- npm install (just pour la première fois, pour installer le package nodeModules)
+- ng serve `ou` npm start (pour démarrer le front-end)
+- mvn spring-boot:run pour démarrer le back-end `ou` démarrer le back-end à partir de votre l'IDE (((recommandé)))
+---
+nb : pour la base de données, on va changer la configuration de projet de `MySQL` à `Oracle` après choisie une version stable
