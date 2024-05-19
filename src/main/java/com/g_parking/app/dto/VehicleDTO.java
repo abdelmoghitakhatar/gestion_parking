@@ -1,5 +1,6 @@
 package com.g_parking.app.dto;
 
+import com.g_parking.app.domain.UserEntity;
 import com.g_parking.app.domain.enumeration.PermitsType;
 import com.g_parking.app.domain.enumeration.VehicleName;
 import jakarta.validation.constraints.NotNull;
@@ -29,5 +30,7 @@ public class VehicleDTO implements Serializable {
 
     @NotNull
     private PermitsType permitsType;
+
+    private UserEntity user;
 
 }

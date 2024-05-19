@@ -1,5 +1,6 @@
 package com.g_parking.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.g_parking.app.domain.enumeration.VehicleName;
 import com.g_parking.app.domain.enumeration.PermitsType;
 import jakarta.persistence.*;
@@ -37,4 +38,8 @@ public class VehicleEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PermitsType permitsType;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = {"vehicles", "Reservations"})
+    private UserEntity user;
 }

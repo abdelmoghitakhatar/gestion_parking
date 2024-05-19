@@ -7,7 +7,6 @@ import com.g_parking.app.repository.UserRepository;
 import com.g_parking.app.service.UserService;
 import com.g_parking.app.service.mapper.UserMapper;
 import com.g_parking.app.web.utils.UserUtils;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,25 +16,21 @@ import java.util.Optional;
 @Transactional
 public class UserServiceImpl implements UserService{
 
-    private static final int LENGTHID = 32;
-
     private UserRepository userRepository;
     private UserMapper userMapper;
-    private PasswordEncoder passwordEncoder;
     private UserUtils utils;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder, UserUtils utils) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, UserUtils utils) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
-        this.passwordEncoder = passwordEncoder;
         this.utils = utils;
     }
 
     @Override
     public UserResponse addUser(UserDTO userDTO) {
 
-        userDTO.setGeneratedId(utils.generateUserId(LENGTHID));
-        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        userDTO.setUserName(utils.generateUserId());
+        userDTO.setPassword(utils.getHashedPassword(userDTO.getPassword()));
 
         UserEntity user = userMapper.toEntity(userDTO);
         user = userRepository.save(user);
@@ -55,4 +50,16 @@ public class UserServiceImpl implements UserService{
         }
         return null;
     }
+
+  @Override
+  public UserResponse findUserByUserName(String userId) {
+
+    Optional<UserEntity> user = userRepository.findUserEntityByUserName(userId);
+    if(user.isPresent()){
+
+      UserResponse response = new UserResponse();
+      return response.dtoToResponse(userMapper.toDto(user.get()));
+    }
+    return null;
+  }
 }
