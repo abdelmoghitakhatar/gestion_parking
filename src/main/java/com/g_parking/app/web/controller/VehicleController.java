@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/vehicle")
 public class VehicleController {
 
     private VehicleService vehicleService;
@@ -17,7 +17,7 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @PostMapping("/vehicle")
+    @PostMapping("")
     public VehicleDTO addVehicle(@RequestBody VehicleDTO vehicleDTO){
         if(vehicleDTO.getId() != null){
             throw new RuntimeException("Vehicle not accepted");
@@ -28,7 +28,7 @@ public class VehicleController {
         return vehicleService.addVehicle(vehicleDTO);
     }
 
-    @PutMapping("/vehicle/{matricule}")
+    @PutMapping("/{matricule}")
     public VehicleDTO updateVehicle(@RequestBody VehicleDTO vehicleDTO, @PathVariable String matricule){
         if(!Objects.equals(vehicleDTO.getMatricule(), matricule) || vehicleDTO.getId() == null){
             throw new RuntimeException("Vehicle not accepted");
@@ -39,7 +39,7 @@ public class VehicleController {
         return vehicleService.updateVehicle(vehicleDTO);
     }
 
-    @GetMapping("/vehicle/{matricule}")
+    @GetMapping("/{matricule}")
     public VehicleDTO getVehicleByMatricule(@PathVariable String matricule){
         VehicleDTO vehicle = vehicleService.getVehicleByMatricule(matricule);
         if(vehicle == null){
@@ -48,7 +48,7 @@ public class VehicleController {
         return  vehicle;
     }
 
-    @GetMapping("/vehicles")
+    @GetMapping("/all")
     public List<VehicleDTO> getAllVehicles(){
         List<VehicleDTO> vehicle = vehicleService.getVehicles();
         if(vehicle == null){
@@ -57,7 +57,7 @@ public class VehicleController {
         return  vehicle;
     }
 
-    @DeleteMapping("/vehicle/{matricule}")
+    @DeleteMapping("/{matricule}")
     public void deleteVehicle(@PathVariable String matricule){
         vehicleService.removeVehicle(matricule);
     }

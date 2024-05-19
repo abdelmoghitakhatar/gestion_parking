@@ -11,18 +11,13 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 public class UserController {
 
     private UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-
-    @GetMapping("/message")
-    public String getMessage(){
-        return "Hello World!\n it works";
     }
 
     @PostMapping("/signin")
@@ -36,9 +31,9 @@ public class UserController {
         return userService.addUser(userDTO);
     }
 
-    @GetMapping("/profile/{email}")
-    public UserResponse getUserInfo(@PathVariable String email){
-        UserResponse response = userService.findUserByEmail(email);
+    @GetMapping("/{userName}")
+    public UserResponse getUserInfo(@PathVariable String userName){
+        UserResponse response = userService.findUserByUserName(userName);
         if(response == null){
             throw new RuntimeException("User not found");
         }
