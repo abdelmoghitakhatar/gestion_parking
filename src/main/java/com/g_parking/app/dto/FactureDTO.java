@@ -1,23 +1,14 @@
 package com.g_parking.app.dto;
 
-
-import com.g_parking.app.domain.ReservationEntity;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Data
 public class FactureDTO implements Serializable {
 
   @Serial
-  @Getter(AccessLevel.NONE)
-  @Setter(AccessLevel.NONE)
   private static final long serialVersionUID = -2242432126336827712L;
 
   private Long id;
@@ -31,5 +22,45 @@ public class FactureDTO implements Serializable {
   @NotNull
   private float montant;
 
-  private ReservationEntity reservation;
+  private ReservationDTO reservation;
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public LocalDate getDateFacture() {
+    return dateFacture;
+  }
+
+  public void setDateFacture(LocalDate dateFacture) {
+    this.dateFacture = dateFacture;
+  }
+
+  public String getNumeroFacture() {
+    return numeroFacture;
+  }
+
+  public void setNumeroFacture(String numeroFacture) {
+    this.numeroFacture = numeroFacture;
+  }
+
+  public float getMontant() {
+    return montant;
+  }
+
+  public void setMontant(float montant) {
+    this.montant = montant;
+  }
+
+  public ReservationDTO getReservation() {
+    return reservation;
+  }
+
+  public void setReservation(ReservationDTO reservation) {
+    this.reservation = reservation;
+  }
 }

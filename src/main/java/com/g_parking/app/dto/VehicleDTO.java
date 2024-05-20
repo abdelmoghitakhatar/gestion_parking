@@ -1,23 +1,15 @@
 package com.g_parking.app.dto;
 
-import com.g_parking.app.domain.UserEntity;
 import com.g_parking.app.domain.enumeration.PermitsType;
 import com.g_parking.app.domain.enumeration.VehicleName;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-@Data
 public class VehicleDTO implements Serializable {
 
     @Serial
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
     private static final long serialVersionUID = -2954593831300966870L;
 
     private Long id;
@@ -31,6 +23,45 @@ public class VehicleDTO implements Serializable {
     @NotNull
     private PermitsType permitsType;
 
-    private UserEntity user;
+    private UserDTO user;
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getMatricule() {
+    return matricule;
+  }
+
+  public void setMatricule(String matricule) {
+    this.matricule = matricule;
+  }
+
+  public VehicleName getVehicleName() {
+    return vehicleName;
+  }
+
+  public void setVehicleName(VehicleName vehicleName) {
+    this.vehicleName = vehicleName;
+  }
+
+  public PermitsType getPermitsType() {
+    return permitsType;
+  }
+
+  public void setPermitsType(PermitsType permitsType) {
+    this.permitsType = permitsType;
+  }
+
+  public UserDTO getUser() {
+    return user;
+  }
+
+  public void setUser(UserDTO user) {
+    this.user = user;
+  }
 }

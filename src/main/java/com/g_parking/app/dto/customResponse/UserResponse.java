@@ -4,21 +4,14 @@ import com.g_parking.app.dto.UserDTO;
 import com.g_parking.app.dto.VehicleDTO;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
-@Data
 public class UserResponse implements Serializable {
 
     @Serial
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
     private static final long serialVersionUID = -2210159572741327166L;
 
     private String userName;
@@ -36,7 +29,47 @@ public class UserResponse implements Serializable {
 
     private Set<VehicleDTO> vehicles;
 
-    public UserResponse dtoToResponse(UserDTO userDTO){
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public Set<VehicleDTO> getVehicles() {
+    return vehicles;
+  }
+
+  public void setVehicles(Set<VehicleDTO> vehicles) {
+    this.vehicles = vehicles;
+  }
+
+  public UserResponse dtoToResponse(UserDTO userDTO){
         this.setUserName(userDTO.getUserName());
         this.setEmail(userDTO.getEmail());
         this.setFirstName(userDTO.getFirstName());

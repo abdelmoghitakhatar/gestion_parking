@@ -4,52 +4,49 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
-@Data
 @Entity
 public class UserEntity implements Serializable {
 
-    @Serial
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    private static final long serialVersionUID = -4237606748612106119L;
+  @Serial
+  private static final long serialVersionUID = -4237606748612106119L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @NotNull
-    @Column(unique = true)
-    private String userName;
+  @NotNull
+  @Column(unique = true)
+  private String userName;
 
-    @Email
-    @NotNull
-    @Size(min = 5, max = 254)
-    @Column(unique = true)
-    private String email;
+  @Email
+  @NotNull
+  @Size(min = 5, max = 254)
+  @Column(unique = true)
+  private String email;
 
-    @NotNull
-    @Size(min = 3, max = 25)
-    private String firstName;
+  @NotNull
+  @Size(min = 3, max = 25)
+  private String firstName;
 
-    @NotNull
-    @Size(min = 3, max = 25)
-    private String lastName;
+  @NotNull
+  @Size(min = 3, max = 25)
+  private String lastName;
 
-    @NotNull
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
+  @NotNull
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  private String password;
 
-    @NotNull
-    @Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$")
-    private String phone;
+  @NotNull
+  @Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$")
+  @Column(unique = true)
+  private String phone;
 
-    private String address;
+  private String address;
 
   @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JsonIgnoreProperties(value = {"user"})
@@ -57,6 +54,85 @@ public class UserEntity implements Serializable {
 
   @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JsonIgnoreProperties(value = {"user"})
-  private Set<ReservationEntity> Reservations;
+  private Set<ReservationEntity> reservations;
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public Set<VehicleEntity> getVehicles() {
+    return vehicles;
+  }
+
+  public void setVehicles(Set<VehicleEntity> vehicles) {
+    this.vehicles = vehicles;
+  }
+
+  public Set<ReservationEntity> getReservations() {
+    return reservations;
+  }
+
+  public void setReservations(Set<ReservationEntity> reservations) {
+    this.reservations = reservations;
+  }
 }

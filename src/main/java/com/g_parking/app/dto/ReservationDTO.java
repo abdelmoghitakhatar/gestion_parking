@@ -1,25 +1,14 @@
 package com.g_parking.app.dto;
 
-import com.g_parking.app.domain.FactureEntity;
-import com.g_parking.app.domain.ParkingEntity;
-import com.g_parking.app.domain.UserEntity;
-
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
 public class ReservationDTO implements Serializable {
 
   @Serial
-  @Getter(AccessLevel.NONE)
-  @Setter(AccessLevel.NONE)
   private static final long serialVersionUID = 4402279045616248349L;
 
   private Long id;
@@ -36,9 +25,73 @@ public class ReservationDTO implements Serializable {
   @NotNull
   private LocalDateTime dateFin;
 
-  private FactureEntity facture;
+  private FactureDTO facture;
 
-  private UserEntity user;
+  private UserDTO user;
 
-  private ParkingEntity parking;
+  private ParkingDTO parking;
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getNumReservation() {
+    return numReservation;
+  }
+
+  public void setNumReservation(String numReservation) {
+    this.numReservation = numReservation;
+  }
+
+  public boolean isCanceled() {
+    return canceled;
+  }
+
+  public void setCanceled(boolean canceled) {
+    this.canceled = canceled;
+  }
+
+  public LocalDateTime getDateDebut() {
+    return dateDebut;
+  }
+
+  public void setDateDebut(LocalDateTime dateDebut) {
+    this.dateDebut = dateDebut;
+  }
+
+  public LocalDateTime getDateFin() {
+    return dateFin;
+  }
+
+  public void setDateFin(LocalDateTime dateFin) {
+    this.dateFin = dateFin;
+  }
+
+  public FactureDTO getFacture() {
+    return facture;
+  }
+
+  public void setFacture(FactureDTO facture) {
+    this.facture = facture;
+  }
+
+  public UserDTO getUser() {
+    return user;
+  }
+
+  public void setUser(UserDTO user) {
+    this.user = user;
+  }
+
+  public ParkingDTO getParking() {
+    return parking;
+  }
+
+  public void setParking(ParkingDTO parking) {
+    this.parking = parking;
+  }
 }

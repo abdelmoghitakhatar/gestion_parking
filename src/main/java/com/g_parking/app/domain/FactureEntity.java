@@ -3,22 +3,15 @@ package com.g_parking.app.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Data
 @Entity
 public class FactureEntity implements Serializable {
 
   @Serial
-  @Getter(AccessLevel.NONE)
-  @Setter(AccessLevel.NONE)
   private static final long serialVersionUID = -6100591526098454505L;
 
   @Id
@@ -37,4 +30,44 @@ public class FactureEntity implements Serializable {
   @OneToOne
   @JsonIgnoreProperties(value = {"facture"})
   private ReservationEntity reservation;
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public LocalDate getDateFacture() {
+    return dateFacture;
+  }
+
+  public void setDateFacture(LocalDate dateFacture) {
+    this.dateFacture = dateFacture;
+  }
+
+  public String getNumeroFacture() {
+    return numeroFacture;
+  }
+
+  public void setNumeroFacture(String numeroFacture) {
+    this.numeroFacture = numeroFacture;
+  }
+
+  public float getMontant() {
+    return montant;
+  }
+
+  public void setMontant(float montant) {
+    this.montant = montant;
+  }
+
+  public ReservationEntity getReservation() {
+    return reservation;
+  }
+
+  public void setReservation(ReservationEntity reservation) {
+    this.reservation = reservation;
+  }
 }
