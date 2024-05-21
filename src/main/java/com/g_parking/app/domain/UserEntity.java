@@ -7,6 +7,7 @@ import jakarta.validation.constraints.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -49,12 +50,12 @@ public class UserEntity implements Serializable {
   private String address;
 
   @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JsonIgnoreProperties(value = {"user"})
-  private Set<VehicleEntity> vehicles;
+  @JsonIgnoreProperties(value = {"user"}, allowSetters = true)
+  private Set<VehicleEntity> vehicles = new HashSet<>();
 
   @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JsonIgnoreProperties(value = {"user"})
-  private Set<ReservationEntity> reservations;
+  @JsonIgnoreProperties(value = {"user"}, allowSetters = true)
+  private Set<ReservationEntity> reservations = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -125,6 +126,9 @@ public class UserEntity implements Serializable {
   }
 
   public void setVehicles(Set<VehicleEntity> vehicles) {
+    if(vehicles != null) {
+      vehicles.forEach(i -> i.setUser(this));
+    }
     this.vehicles = vehicles;
   }
 
@@ -133,6 +137,9 @@ public class UserEntity implements Serializable {
   }
 
   public void setReservations(Set<ReservationEntity> reservations) {
+    if(reservations != null) {
+      reservations.forEach(i -> i.setUser(this));
+    }
     this.reservations = reservations;
   }
 }

@@ -32,7 +32,7 @@ public class ReservationEntity implements Serializable {
   private LocalDateTime dateFin;
 
   @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @JsonIgnoreProperties(value = {"reservation"})
+  @JsonIgnoreProperties(value = {"reservation"}, allowSetters = true)
   private FactureEntity facture;
 
   @ManyToOne
@@ -40,7 +40,7 @@ public class ReservationEntity implements Serializable {
   private UserEntity user;
 
   @ManyToOne
-  @JsonIgnoreProperties(value = {"reservations"})
+  @JsonIgnoreProperties(value = {"reservations"}, allowSetters = true)
   private ParkingEntity parking;
 
   public Long getId() {

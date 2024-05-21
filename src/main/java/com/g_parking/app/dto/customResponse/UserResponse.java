@@ -1,5 +1,6 @@
 package com.g_parking.app.dto.customResponse;
 
+import com.g_parking.app.dto.ReservationDTO;
 import com.g_parking.app.dto.UserDTO;
 import com.g_parking.app.dto.VehicleDTO;
 import jakarta.validation.constraints.NotNull;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.Size;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserResponse implements Serializable {
@@ -27,7 +29,10 @@ public class UserResponse implements Serializable {
     @Size(min = 3, max = 25)
     private String lastName;
 
-    private Set<VehicleDTO> vehicles;
+    private Set<VehicleDTO> vehicles = new HashSet<>();
+
+    private Set<ReservationDTO> Reservations = new HashSet<>();
+
 
   public String getUserName() {
     return userName;
@@ -69,12 +74,21 @@ public class UserResponse implements Serializable {
     this.vehicles = vehicles;
   }
 
+  public Set<ReservationDTO> getReservations() {
+    return Reservations;
+  }
+
+  public void setReservations(Set<ReservationDTO> reservations) {
+    Reservations = reservations;
+  }
+
   public UserResponse dtoToResponse(UserDTO userDTO){
-        this.setUserName(userDTO.getUserName());
-        this.setEmail(userDTO.getEmail());
-        this.setFirstName(userDTO.getFirstName());
-        this.setLastName(userDTO.getLastName());
-        this.setVehicles(userDTO.getVehicles());
-        return this;
+    this.setUserName(userDTO.getUserName());
+    this.setEmail(userDTO.getEmail());
+    this.setFirstName(userDTO.getFirstName());
+    this.setLastName(userDTO.getLastName());
+    this.setVehicles(userDTO.getVehicles());
+    this.setReservations(userDTO.getReservations());
+    return this;
     }
 }

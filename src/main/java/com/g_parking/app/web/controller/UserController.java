@@ -1,14 +1,9 @@
 package com.g_parking.app.web.controller;
 
-import com.g_parking.app.domain.UserEntity;
 import com.g_parking.app.dto.customResponse.UserResponse;
 import com.g_parking.app.dto.UserDTO;
 import com.g_parking.app.service.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")

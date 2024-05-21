@@ -12,4 +12,12 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring")
 public interface FactureMapper extends EntityMapper<FactureDTO, FactureEntity>{
 
+  @Mapping(source = "reservation", target = "reservation", qualifiedByName = "reservation")
+  FactureDTO toDto(FactureEntity facture);
+
+  @Named("reservation")
+  @BeanMapping(ignoreByDefault = true)
+  @Mapping(source = "id", target = "id")
+  ReservationDTO toDtoReservation(ReservationEntity reservation);
+
 }

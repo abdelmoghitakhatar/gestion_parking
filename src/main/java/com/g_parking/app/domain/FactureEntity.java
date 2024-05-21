@@ -28,7 +28,7 @@ public class FactureEntity implements Serializable {
   private float montant;
 
   @OneToOne
-  @JsonIgnoreProperties(value = {"facture"})
+  @JsonIgnoreProperties(value = {"facture"}, allowSetters = true)
   private ReservationEntity reservation;
 
   public Long getId() {

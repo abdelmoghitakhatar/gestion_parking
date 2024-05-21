@@ -9,14 +9,14 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface VehicleMapper extends EntityMapper<VehicleDTO, VehicleEntity>{
 
-  @Mapping(source = "user", target = "user", qualifiedByName = "userId")
+  @Mapping(source = "user", target = "user", qualifiedByName = "user")
   VehicleDTO toDto(VehicleEntity vehicle);
 
-  @Named("userId")
+  @Named("user")
   @BeanMapping(ignoreByDefault = true)
   @Mapping(source = "userName", target = "userName")
   @Mapping(source = "email", target = "email")
   @Mapping(source = "firstName", target = "firstName")
   @Mapping(source = "lastName", target = "lastName")
-  UserDTO toDtoUserId(UserEntity user);
+  UserDTO toDtoUser(UserEntity user);
 }

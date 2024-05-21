@@ -1,7 +1,5 @@
 package com.g_parking.app.dto;
 
-import jakarta.validation.constraints.NotNull;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,13 +11,10 @@ public class FactureDTO implements Serializable {
 
   private Long id;
 
-  @NotNull
   private LocalDate dateFacture = LocalDate.now();
 
-  @NotNull
   private String numeroFacture;
 
-  @NotNull
   private float montant;
 
   private ReservationDTO reservation;
