@@ -9,21 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-
-    @PostMapping("/signin")
-    public UserResponse signin(@RequestBody UserDTO userDTO){
-        if(userDTO.getId() != null) {
-            throw new RuntimeException("User not accepted");
-        }
-        if(userService.findUserByEmail(userDTO.getEmail()) != null){
-            throw new RuntimeException("User already exists");
-        }
-        return userService.addUser(userDTO);
     }
 
     @GetMapping("/{userName}")

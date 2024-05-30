@@ -16,9 +16,9 @@ import java.util.Optional;
 @Transactional
 public class UserServiceImpl implements UserService{
 
-    private UserRepository userRepository;
-    private UserMapper userMapper;
-    private UserUtils utils;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
+    private final UserUtils utils;
 
     public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, UserUtils utils) {
         this.userRepository = userRepository;
@@ -52,9 +52,9 @@ public class UserServiceImpl implements UserService{
     }
 
   @Override
-  public UserResponse findUserByUserName(String userId) {
+  public UserResponse findUserByUserName(String userName) {
 
-    Optional<UserEntity> user = userRepository.findUserEntityByUserName(userId);
+    Optional<UserEntity> user = userRepository.findUserEntityByUserName(userName);
     if(user.isPresent()){
 
       UserResponse response = new UserResponse();

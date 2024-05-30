@@ -7,10 +7,11 @@ import { AppComponent } from './layouts/main/app.component';
 import {NavbarComponent} from "./layouts/navbar/navbar.component";
 import {FooterComponent} from "./layouts/footer/footer.component";
 import {httpInterceptorProviders} from "./core/interceptors";
-import {registerLocaleData} from "@angular/common";
+import {NgOptimizedImage, registerLocaleData} from "@angular/common";
 import {SharedModule} from "./shared/shared.module";
 import {HomeModule} from "./layouts/home/home.module";
-import {LoginModule} from "./login/login.module";
+import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -18,12 +19,16 @@ import {LoginModule} from "./login/login.module";
     NavbarComponent,
     FooterComponent
   ],
-  imports: [
-    BrowserModule,
-    HomeModule,
-    AppRoutingModule,
-    SharedModule
-  ],
+    imports: [
+        BrowserModule,
+        HomeModule,
+        AppRoutingModule,
+        SharedModule,
+        NgOptimizedImage,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        NoopAnimationsModule
+    ],
   providers: [
     Title,
     { provide: LOCALE_ID, useValue: 'fr' },

@@ -1,0 +1,115 @@
+<section class="vh-80 gradient-custom">
+  <div class="container py-5 h-80">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+            <form (ngSubmit)="register()">
+
+              <div class="row">
+
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="firstName">Prénom :</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      class="form-control form-control-lg"
+                      required
+                      [(ngModel)]="user.firstName"
+                      [ngModelOptions]="{standalone: true}"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="lastName">Nom :</label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      class="form-control form-control-lg"
+                      required
+                      [(ngModel)]="user.lastName"
+                      [ngModelOptions]="{standalone: true}"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+                  <div data-mdb-input-init class="form-outline datepicker w-100">
+                    <label for="email" class="form-label">Email :</label>
+                    <input
+                      type="email"
+                      class="form-control form-control-lg"
+                      id="email" required
+                      [(ngModel)]="user.email"
+                      [ngModelOptions]="{standalone: true}"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4 pb-2">
+                  <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="password">Mot de Pass :</label>
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control form-control-lg"
+                      required
+                      [(ngModel)]="user.password"
+                      [ngModelOptions]="{standalone: true}"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6 mb-4 pb-2">
+                  <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="Address">Adresse :</label>
+                    <input
+                      type="text"
+                      id="Address"
+                      class="form-control form-control-lg"
+                      required
+                      [(ngModel)]="user.address"
+                      [ngModelOptions]="{standalone: true}"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4 pb-2">
+                  <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="phoneNumber">Téléphone :</label>
+                    <input
+                      type="tel"
+                      id="phoneNumber"
+                      class="form-control form-control-lg"
+                      required
+                      [(ngModel)]="user.phone"
+                      [ngModelOptions]="{standalone: true}"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="mt-4 d-grid">
+                <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Register" [disabled]="isFormValid()"/>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

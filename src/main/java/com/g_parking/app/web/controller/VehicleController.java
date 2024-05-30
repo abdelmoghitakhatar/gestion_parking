@@ -11,7 +11,7 @@ import java.util.Objects;
 @RequestMapping("/vehicle")
 public class VehicleController {
 
-    private VehicleService vehicleService;
+    private final VehicleService vehicleService;
 
     public VehicleController(VehicleService vehicleService) {
         this.vehicleService = vehicleService;

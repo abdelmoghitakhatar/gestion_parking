@@ -7,6 +7,8 @@ import {Component, OnInit} from "@angular/core";
 })
 export class NavbarComponent implements OnInit {
 
+  readonly imageUrl: string = "assets/images/home_image.png";
+
   ngOnInit(): void {
 
   }

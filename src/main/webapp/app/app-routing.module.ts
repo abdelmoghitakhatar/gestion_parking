@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {NAVBAR_ROUTE} from "./layouts/navbar/navbar.route";
-import {EntitiesRoutingModule} from "./entities/entities-routing.module";
 
 const routes: Routes = [
   {
@@ -9,10 +8,18 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
   },
   {
+    path: 'signup',
+    loadChildren: () => import('./layouts/registration/register.module').then(m => m.RegisterModule),
+  },
+  {
     path: '',
     loadChildren: () => import("./entities/entities-routing.module").then(m => m.EntitiesRoutingModule)
   },
-  NAVBAR_ROUTE
+  NAVBAR_ROUTE,
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({
