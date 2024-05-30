@@ -26,19 +26,12 @@ export class RegisterComponent implements OnInit {
 
   isFormValid(): boolean {
     return (
-      this.user.phone === null ||
-      this.user.address === null ||
-      this.user.firstName === null ||
-      this.user.lastName === null ||
-      this.user.email === null ||
-      this.user.password === null
-    ) || (
-      this.user.phone === "" ||
-      this.user.address === "" ||
-      this.user.firstName === "" ||
-      this.user.lastName === "" ||
-      this.user.email === "" ||
-      this.user.password === ""
+      !this.user.phone||
+      !this.user.address||
+      !this.user.firstName||
+      !this.user.lastName||
+      !this.user.email||
+      !this.user.password
     )
   }
 

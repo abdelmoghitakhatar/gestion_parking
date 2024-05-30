@@ -1,0 +1,7 @@
+<div class="container" >
+  <div class="row mx-auto">
+    <div *ngFor="let place of parkings" class="col-md-4 ">
+      <parking [parking]="place" [auth]="true" ></parking>
+    </div>
+  </div>
+</div>

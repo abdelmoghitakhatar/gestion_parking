@@ -21,13 +21,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.loginService.login(this.info).subscribe(response => this.jwt = response);
+    this.loginService.login(this.info).subscribe({
+      next: response => this.jwt = response,
+      error: () => alert("Erreur d'authentification\nVérifier email et password")
+    });
   }
 
   isFormValid(): boolean{
     return (
-      this.info.username === null || this.info.password === null ||
-      this.info.username === '' || this.info.password === ''
+      !this.info.username || !this.info.password
+
     )
   }
 

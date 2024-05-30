@@ -1,0 +1,13 @@
+<div class="p-3 m-1" style="width: max-content;">
+<p-card [header]="'Type de Place : '+parking.typePlace" [subheader]="'N°= '+parking.numPlace" [style]="{ width: '400px', background: '#EEEEEE'}">
+  <ng-template pTemplate="footer">
+    <div class="flex gap-3 mt-1 d-grid" *ngIf="isAuthenticated" >
+      <button
+        class="btn btn-primary btn-lg"
+        (click)="alert('todo reservation after')">
+        <span>Reserver</span>
+      </button>
+    </div>
+  </ng-template>
+</p-card>
+</div>
