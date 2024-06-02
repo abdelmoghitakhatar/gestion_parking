@@ -13,16 +13,16 @@ public class ReservationDTO implements Serializable {
 
   private Long id;
 
-  @NotNull
+  //@NotNull
   private String numReservation;
 
-  @NotNull
+ // @NotNull
   private boolean canceled = false;
 
-  @NotNull
+  //@NotNull
   private LocalDateTime dateDebut;
 
-  @NotNull
+  //@NotNull
   private LocalDateTime dateFin;
 
   private FactureDTO facture;

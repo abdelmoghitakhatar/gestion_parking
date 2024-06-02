@@ -35,6 +35,10 @@ public interface UserMapper extends EntityMapper<UserDTO, UserEntity> {
   FactureDTO toDtoFacture(FactureEntity facture);
 
   @Named("parking")
+  @BeanMapping(ignoreByDefault = true)
+  @Mapping(source = "id", target = "id")
+  @Mapping(source = "numPlace", target = "numPlace")
+  @Mapping(source = "typePlace", target = "typePlace")
   ParkingDTO toDtoParking(ParkingEntity parking);
 
   @BeanMapping(ignoreByDefault = true)

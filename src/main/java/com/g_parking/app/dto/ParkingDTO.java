@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ParkingDTO implements Serializable {
 
@@ -13,11 +15,21 @@ public class ParkingDTO implements Serializable {
 
   private Long id;
 
-  @NotNull
+ // @NotNull
   private int numPlace;
 
-  @NotNull
+ // @NotNull
   private PermitsType typePlace;
+
+  private Set<ReservationDTO> reservations = new HashSet<>();
+
+  public Set<ReservationDTO> getReservations() {
+    return reservations;
+  }
+
+  public void setReservations(Set<ReservationDTO> reservations) {
+    this.reservations = reservations;
+  }
 
   public Long getId() {
     return id;

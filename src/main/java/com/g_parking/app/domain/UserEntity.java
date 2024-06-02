@@ -20,31 +20,31 @@ public class UserEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotNull
-  @Column(unique = true)
+ // @NotNull
+ // @Column(unique = true)
   private String userName;
 
-  @Email
-  @NotNull
-  @Size(min = 5, max = 254)
-  @Column(unique = true)
+ // @Email
+ // @NotNull
+ // @Size(min = 5, max = 254)
+ // @Column(unique = true)
   private String email;
 
-  @NotNull
-  @Size(min = 3, max = 25)
-  private String firstName;
+ // @NotNull
+//  @Size(min = 3, max = 25)
+ private String firstName;
 
-  @NotNull
-  @Size(min = 3, max = 25)
+ // @NotNull
+ // @Size(min = 3, max = 25)
   private String lastName;
 
-  @NotNull
-  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+ // @NotNull
+ // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
-  @NotNull
-  @Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$")
-  @Column(unique = true)
+  //@NotNull
+  //@Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$")
+  //@Column(unique = true)
   private String phone;
 
   private String address;

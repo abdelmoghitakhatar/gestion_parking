@@ -1,16 +1,36 @@
 package com.g_parking.app.web.controller;
 
+import com.g_parking.app.dto.ReservationDTO;
 import com.g_parking.app.service.ReservationService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
 
-  private ReservationService reservationService;
+  private final ReservationService reservationService;
 
   public ReservationController(ReservationService reservationService) {
     this.reservationService = reservationService;
+  }
+
+  @PostMapping("/add")
+  public ResponseEntity<ReservationDTO> addReservation(@RequestBody ReservationDTO reservationDTO){
+    reservationDTO = reservationService.addReservation(reservationDTO);
+    return new ResponseEntity<>(reservationDTO, HttpStatus.OK);
+  }
+
+  @PostMapping("/add-payed")
+  public ResponseEntity<ReservationDTO> payReservation(@RequestBody ReservationDTO reservationDTO){
+    reservationDTO = reservationService.addPayedReservation(reservationDTO);
+    return new ResponseEntity<>(reservationDTO, HttpStatus.OK);
+  }
+
+  @PostMapping("/pay-exist")
+  public ResponseEntity<ReservationDTO> payExistReservation(@RequestParam String numReservation){
+    ReservationDTO reservationDTO = reservationService.addFactureForExistReservation(numReservation);
+    return new ResponseEntity<>(reservationDTO, HttpStatus.OK);
   }
 }

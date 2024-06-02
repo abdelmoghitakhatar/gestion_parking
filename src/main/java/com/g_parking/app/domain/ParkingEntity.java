@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class ParkingEntity implements Serializable {
@@ -17,13 +19,16 @@ public class ParkingEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotNull
+ // @NotNull
   private int numPlace;
 
-  @NotNull
+ // @NotNull
   @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
+ // @Column(nullable = false)
   private PermitsType typePlace;
+
+  @OneToMany(mappedBy = "parking")
+  private Set<ReservationEntity> reservations = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -47,5 +52,13 @@ public class ParkingEntity implements Serializable {
 
   public void setTypePlace(PermitsType typePlace) {
     this.typePlace = typePlace;
+  }
+
+  public Set<ReservationEntity> getReservations() {
+    return reservations;
+  }
+
+  public void setReservations(Set<ReservationEntity> reservations) {
+    this.reservations = reservations;
   }
 }

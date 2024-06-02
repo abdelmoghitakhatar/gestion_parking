@@ -18,18 +18,18 @@ public class VehicleEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(unique = true, nullable = false)
+  //  @NotNull
+  //  @Column(unique = true, nullable = false)
     private String matricule;
 
-    @NotNull
+   // @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+   // @Column(nullable = false)
     private VehicleName vehicleName;
 
-    @NotNull
+  //  @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private PermitsType permitsType;
 
     @ManyToOne

@@ -18,17 +18,17 @@ public class ReservationEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotNull
-  @Column(unique = true)
+ // @NotNull
+ // @Column(unique = true)
   private String numReservation;
 
-  @NotNull
+ // @NotNull
   private boolean canceled = false;
 
-  @NotNull
+ // @NotNull
   private LocalDateTime dateDebut;
 
-  @NotNull
+ // @NotNull
   private LocalDateTime dateFin;
 
   @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -88,6 +88,9 @@ public class ReservationEntity implements Serializable {
   }
 
   public void setFacture(FactureEntity facture) {
+    if(facture != null){
+      facture.setReservation(this);
+    }
     this.facture = facture;
   }
 

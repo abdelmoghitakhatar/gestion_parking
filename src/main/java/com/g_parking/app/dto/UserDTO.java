@@ -19,24 +19,24 @@ public class UserDTO implements Serializable {
 
   private String userName;
 
-  @NotNull
-  @Email
-  @Size(min = 5, max = 254)
+//  @NotNull
+ // @Email
+//  @Size(min = 5, max = 254)
   private String email;
 
-  @NotNull
-  @Size(min = 3, max = 25)
+ // @NotNull
+ // @Size(min = 3, max = 25)
   private String firstName;
 
-  @NotNull
-  @Size(min = 3, max = 25)
+  //@NotNull
+ // @Size(min = 3, max = 25)
   private String lastName;
 
-  @NotNull
+//  @NotNull
   private String password;
 
-  @NotNull
-  @Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$")
+//  @NotNull
+//  @Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$")
   private String phone;
 
   private String address;

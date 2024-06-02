@@ -18,13 +18,13 @@ public class FactureEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotNull
+ // @NotNull
   private LocalDate dateFacture = LocalDate.now();
 
-  @NotNull
+ // @NotNull
   private String numeroFacture;
 
-  @NotNull
+  //@NotNull
   private float montant;
 
   @OneToOne

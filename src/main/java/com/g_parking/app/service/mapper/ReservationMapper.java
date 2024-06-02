@@ -1,9 +1,11 @@
 package com.g_parking.app.service.mapper;
 
 import com.g_parking.app.domain.FactureEntity;
+import com.g_parking.app.domain.ParkingEntity;
 import com.g_parking.app.domain.ReservationEntity;
 import com.g_parking.app.domain.UserEntity;
 import com.g_parking.app.dto.FactureDTO;
+import com.g_parking.app.dto.ParkingDTO;
 import com.g_parking.app.dto.ReservationDTO;
 import com.g_parking.app.dto.UserDTO;
 import org.mapstruct.BeanMapping;
@@ -16,6 +18,7 @@ public interface ReservationMapper extends EntityMapper<ReservationDTO, Reservat
 
   @Mapping(source = "user", target = "user", qualifiedByName = "user")
   @Mapping(source = "facture", target = "facture", qualifiedByName = "facture")
+  @Mapping(source = "parking", target = "parking", qualifiedByName = "parking")
   ReservationDTO toDto(ReservationEntity reservation);
 
   @Named("user")
@@ -33,4 +36,11 @@ public interface ReservationMapper extends EntityMapper<ReservationDTO, Reservat
   @Mapping(source = "numeroFacture", target = "numeroFacture")
   @Mapping(source = "montant", target = "montant")
   FactureDTO toDtoFacture(FactureEntity facture);
+
+  @Named("parking")
+  @BeanMapping(ignoreByDefault = true)
+  @Mapping(source = "id", target = "id")
+  @Mapping(source = "numPlace", target = "numPlace")
+  @Mapping(source = "typePlace", target = "typePlace")
+  ParkingDTO toDtoParking(ParkingEntity parking);
 }

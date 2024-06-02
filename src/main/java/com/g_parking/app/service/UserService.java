@@ -9,6 +9,6 @@ public interface UserService {
 
     public UserResponse findUserByEmail(String email);
 
-    public UserResponse findUserByUserName(String userId);
+    public UserResponse getConnectedUser();
 
 }

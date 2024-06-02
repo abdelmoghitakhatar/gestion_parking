@@ -15,9 +15,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/{userName}")
-    public UserResponse getUserInfo(@PathVariable String userName){
-        UserResponse response = userService.findUserByUserName(userName);
+    @GetMapping("/profile")
+    public UserResponse getUserInfo(){
+        UserResponse response = userService.getConnectedUser();
         if(response == null){
             throw new RuntimeException("User not found");
         }

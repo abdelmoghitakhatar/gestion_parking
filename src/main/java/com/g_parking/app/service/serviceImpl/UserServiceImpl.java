@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService{
 
         Optional<UserEntity> user = userRepository.findUserEntityByEmail(email);
         if(user.isPresent()){
-
             UserResponse response = new UserResponse();
             return response.dtoToResponse(userMapper.toDto(user.get()));
         }
@@ -52,14 +51,11 @@ public class UserServiceImpl implements UserService{
     }
 
   @Override
-  public UserResponse findUserByUserName(String userName) {
+  public UserResponse getConnectedUser() {
 
-    Optional<UserEntity> user = userRepository.findUserEntityByUserName(userName);
-    if(user.isPresent()){
+    UserDTO user = utils.getConnectedUser();
 
-      UserResponse response = new UserResponse();
-      return response.dtoToResponse(userMapper.toDto(user.get()));
-    }
-    return null;
+    UserResponse response = new UserResponse();
+    return response.dtoToResponse(user);
   }
 }

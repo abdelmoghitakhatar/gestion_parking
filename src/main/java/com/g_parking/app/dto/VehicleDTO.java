@@ -14,13 +14,13 @@ public class VehicleDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
+  //  @NotNull
     private String matricule;
 
-    @NotNull
+ //   @NotNull
     private VehicleName vehicleName;
 
-    @NotNull
+ //   @NotNull
     private PermitsType permitsType;
 
     private UserDTO user;
