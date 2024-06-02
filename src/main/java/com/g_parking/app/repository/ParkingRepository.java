@@ -20,4 +20,6 @@ public interface ParkingRepository extends JpaRepository<ParkingEntity, Long> {
     "OR (r.dateDebut <= :dateFin AND r.dateFin >= :dateFin))")
   Set<ParkingEntity> getPlacesByTime(@Param("dateDebut")LocalDateTime dateDebut, @Param("dateFin")LocalDateTime dateFin);
 
+   void deleteByNumPlace(int numPlace);
+
 }

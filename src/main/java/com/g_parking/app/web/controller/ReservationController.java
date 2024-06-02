@@ -33,4 +33,10 @@ public class ReservationController {
     ReservationDTO reservationDTO = reservationService.addFactureForExistReservation(numReservation);
     return new ResponseEntity<>(reservationDTO, HttpStatus.OK);
   }
+
+  @PutMapping("/cancel-reservation/{numReservation}")
+  public ResponseEntity<String> cancelReservation(@PathVariable String numReservation){
+    reservationService.cancelReservation(numReservation);
+    return new ResponseEntity<>(numReservation, HttpStatus.OK);
+  }
 }

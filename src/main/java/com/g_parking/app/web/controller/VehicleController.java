@@ -19,12 +19,12 @@ public class VehicleController {
 
     @PostMapping("")
     public VehicleDTO addVehicle(@RequestBody VehicleDTO vehicleDTO){
-        if(vehicleDTO.getId() != null){
-            throw new RuntimeException("Vehicle not accepted");
-        }
-        if(vehicleService.getVehicleByMatricule(vehicleDTO.getMatricule()) != null){
-            throw new RuntimeException("Vehicle already exists");
-        }
+//        if(vehicleDTO.getId() != null){
+//            throw new RuntimeException("Vehicle not accepted");
+//        }
+//        if(vehicleService.getVehicleByMatricule(vehicleDTO.getMatricule()) != null){
+//            throw new RuntimeException("Vehicle already exists");
+//        }
         return vehicleService.addVehicle(vehicleDTO);
     }
 

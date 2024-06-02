@@ -12,4 +12,9 @@ public interface ParkingService {
   Set<ParkingDTO> getFreePlaces(LocalDateTime dateDebut, LocalDateTime dateFin);
 
   ParkingDTO addPlace(ParkingDTO parking);
+
+  void removePlace(int numPlace);
+
+  ParkingDTO updatePlace(ParkingDTO parking);
+
 }

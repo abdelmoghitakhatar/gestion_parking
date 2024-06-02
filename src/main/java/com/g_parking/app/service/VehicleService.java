@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface VehicleService {
 
-    public VehicleDTO addVehicle(VehicleDTO vehicleDTO);
+    VehicleDTO addVehicle(VehicleDTO vehicleDTO);
 
-    public VehicleDTO updateVehicle(VehicleDTO vehicleDTO);
+    VehicleDTO updateVehicle(VehicleDTO vehicleDTO);
 
-    public VehicleDTO getVehicleByMatricule(String matricule);
+    VehicleDTO getVehicleByMatricule(String matricule);
 
-    public List<VehicleDTO> getVehicles();
+    List<VehicleDTO> getVehicles();
 
-    public void removeVehicle(String matricule);
-    
+    void removeVehicle(String matricule);
+
 }

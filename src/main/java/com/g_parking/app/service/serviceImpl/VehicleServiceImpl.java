@@ -20,18 +20,13 @@ import java.util.Set;
 public class VehicleServiceImpl implements VehicleService {
 
   private final UserUtils userUtils;
-  private final UserRepository userRepository;
-  private final UserServiceImpl userServiceImpl;
-
   private VehicleRepository vehicleRepository;
   private VehicleMapper vehicleMapper;
 
-    public VehicleServiceImpl(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper, UserUtils userUtils, UserRepository userRepository, UserServiceImpl userServiceImpl) {
+    public VehicleServiceImpl(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper, UserUtils userUtils) {
       this.vehicleRepository = vehicleRepository;
         this.vehicleMapper = vehicleMapper;
       this.userUtils = userUtils;
-      this.userRepository = userRepository;
-      this.userServiceImpl = userServiceImpl;
     }
 
     @Override
@@ -49,20 +44,17 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public VehicleDTO updateVehicle(VehicleDTO vehicleDTO) {
 
-        VehicleEntity vehicle = vehicleMapper.toEntity(vehicleDTO);
-        vehicle = vehicleRepository.save(vehicle);
-        return vehicleMapper.toDto(vehicle);
+      VehicleEntity vehicle = vehicleMapper.toEntity(vehicleDTO);
+      vehicle = vehicleRepository.save(vehicle);
+      return vehicleMapper.toDto(vehicle);
     }
 
     @Override
     public VehicleDTO getVehicleByMatricule(String matricule) {
 
-        Optional<VehicleEntity> vehicle = vehicleRepository.findVehicleEntityByMatricule(matricule);
-        if(vehicle.isPresent()){
-            return vehicleMapper.toDto(vehicle.get());
-        }
+      Optional<VehicleEntity> vehicle = vehicleRepository.findVehicleEntityByMatricule(matricule);
+      return vehicle.map(vehicleEntity -> vehicleMapper.toDto(vehicleEntity)).orElse(null);
 
-        return null;
     }
 
     @Override

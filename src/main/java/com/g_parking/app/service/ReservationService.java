@@ -11,4 +11,6 @@ public interface ReservationService {
 
   ReservationDTO addFactureForExistReservation(String numReservation);
 
+  void cancelReservation(String numReservation);
+
 }

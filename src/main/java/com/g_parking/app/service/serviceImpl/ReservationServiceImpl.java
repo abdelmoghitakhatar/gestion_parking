@@ -58,4 +58,8 @@ public class ReservationServiceImpl implements ReservationService {
     );
   }
 
+  @Override
+  public void cancelReservation(String numReservation) {
+    reservationRepository.annulerReservation(numReservation);
+  }
 }

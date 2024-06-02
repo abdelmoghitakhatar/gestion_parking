@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,8 +16,8 @@ import java.util.stream.Collectors;
 @Transactional
 public class ParkingServiceImpl implements ParkingService {
 
-  private ParkingRepository parkingRepository;
-  private ParkingMapper parkingMapper;
+  private final ParkingRepository parkingRepository;
+  private final ParkingMapper parkingMapper;
 
   public ParkingServiceImpl(ParkingRepository parkingRepository, ParkingMapper parkingMapper) {
     this.parkingRepository = parkingRepository;
@@ -49,6 +48,18 @@ public class ParkingServiceImpl implements ParkingService {
 
   @Override
   public ParkingDTO addPlace(ParkingDTO parking) {
+    ParkingEntity place = parkingMapper.toEntity(parking);
+    place = parkingRepository.save(place);
+    return parkingMapper.toDto(place);
+  }
+
+  @Override
+  public void removePlace(int numPlace) {
+    parkingRepository.deleteByNumPlace(numPlace);
+  }
+
+  @Override
+  public ParkingDTO updatePlace(ParkingDTO parking) {
     ParkingEntity place = parkingMapper.toEntity(parking);
     place = parkingRepository.save(place);
     return parkingMapper.toDto(place);

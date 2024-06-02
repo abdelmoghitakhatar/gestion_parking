@@ -43,9 +43,9 @@ public class SecurityConfig {
       http
         .csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .exceptionHandling(
-          exception -> exception.authenticationEntryPoint(authenticationEntryPoint)
-        )
+//        .exceptionHandling(
+//          exception -> exception.authenticationEntryPoint(authenticationEntryPoint)
+//        )
         .authorizeHttpRequests(
           auth -> auth
             .requestMatchers(HttpMethod.POST, "/signup").permitAll()
