@@ -44,6 +44,7 @@ public interface UserMapper extends EntityMapper<UserDTO, UserEntity> {
   @BeanMapping(ignoreByDefault = true)
   @Mapping(source = "id", target = "id")
   @Mapping(source = "numReservation", target = "numReservation")
+  @Mapping(source = "canceled", target = "canceled")
   @Mapping(source = "dateDebut", target = "dateDebut")
   @Mapping(source = "dateFin", target = "dateFin")
   @Mapping(source = "facture", target = "facture", qualifiedByName = "facture")

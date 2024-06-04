@@ -22,4 +22,6 @@ public interface ParkingRepository extends JpaRepository<ParkingEntity, Long> {
 
    void deleteByNumPlace(int numPlace);
 
+   ParkingEntity findByNumPlace(int numPlace);
+
 }

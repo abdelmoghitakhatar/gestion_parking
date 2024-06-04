@@ -13,4 +13,6 @@ public interface ReservationService {
 
   void cancelReservation(String numReservation);
 
+  String getNextNumeroReservation();
+
 }

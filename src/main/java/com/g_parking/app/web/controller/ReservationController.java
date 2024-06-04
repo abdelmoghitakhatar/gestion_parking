@@ -28,8 +28,8 @@ public class ReservationController {
     return new ResponseEntity<>(reservationDTO, HttpStatus.OK);
   }
 
-  @PostMapping("/pay-exist")
-  public ResponseEntity<ReservationDTO> payExistReservation(@RequestParam String numReservation){
+  @PostMapping("/pay-exist/{numReservation}")
+  public ResponseEntity<ReservationDTO> payExistReservation(@PathVariable String numReservation){
     ReservationDTO reservationDTO = reservationService.addFactureForExistReservation(numReservation);
     return new ResponseEntity<>(reservationDTO, HttpStatus.OK);
   }

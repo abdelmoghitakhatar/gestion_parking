@@ -11,6 +11,10 @@ import com.g_parking.app.web.utils.UserUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class ReservationServiceImpl implements ReservationService {
@@ -30,6 +34,7 @@ public class ReservationServiceImpl implements ReservationService {
   @Override
   public ReservationDTO addReservation(ReservationDTO reservationDTO) {
     reservationDTO.setUser(userUtils.getConnectedUser());
+    reservationDTO.setNumReservation(getNextNumeroReservation());
     ReservationEntity reservation = reservationMapper.toEntity(reservationDTO);
     reservation = reservationRepository.save(reservation);
     return reservationMapper.toDto(reservation);
@@ -38,6 +43,7 @@ public class ReservationServiceImpl implements ReservationService {
   @Override
   public ReservationDTO addPayedReservation(ReservationDTO reservationDTO) {
     reservationDTO.setUser(userUtils.getConnectedUser());
+    reservationDTO.setNumReservation(getNextNumeroReservation());
     reservationDTO.setFacture(factureUtils.generateFacture(reservationDTO));
     ReservationEntity reservation = reservationMapper.toEntity(reservationDTO);
     reservation = reservationRepository.save(reservation);
@@ -61,5 +67,15 @@ public class ReservationServiceImpl implements ReservationService {
   @Override
   public void cancelReservation(String numReservation) {
     reservationRepository.annulerReservation(numReservation);
+  }
+
+  @Override
+  public String getNextNumeroReservation() {
+    String pattern = LocalDate.now()
+      .format(
+        DateTimeFormatter.ofPattern("yyyyMMdd")
+      );
+    Optional<String> max = reservationRepository.getMaxNumeroReservation(pattern+"%");
+    return max.map(s -> String.valueOf(Long.parseLong(s) + 1)).orElseGet(() -> pattern + "001");
   }
 }

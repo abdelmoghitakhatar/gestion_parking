@@ -60,8 +60,17 @@ public class ParkingServiceImpl implements ParkingService {
 
   @Override
   public ParkingDTO updatePlace(ParkingDTO parking) {
+
     ParkingEntity place = parkingMapper.toEntity(parking);
     place = parkingRepository.save(place);
     return parkingMapper.toDto(place);
+  }
+
+  @Override
+  public ParkingDTO getParkingByNumPlace(int numPlace){
+    ParkingDTO parkingDTO = parkingMapper.toDto(
+      parkingRepository.findByNumPlace(numPlace)
+    );
+   return parkingDTO;
   }
 }

@@ -37,7 +37,8 @@ public class ParkingController {
   @PutMapping("/edit/{numPlace}")
   public ResponseEntity<ParkingDTO> editPlace(@RequestBody ParkingDTO parkingDTO, @PathVariable int numPlace){
     parkingDTO.setNumPlace(numPlace);
-    return new ResponseEntity<>(parkingService.addPlace(parkingDTO), HttpStatus.OK);
+    parkingDTO.setId(parkingService.getParkingByNumPlace(numPlace).getId());
+    return new ResponseEntity<>(parkingService.updatePlace(parkingDTO), HttpStatus.OK);
   }
 
   @DeleteMapping("/{numPlace}")

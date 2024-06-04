@@ -17,4 +17,6 @@ public interface ParkingService {
 
   ParkingDTO updatePlace(ParkingDTO parking);
 
-}
+  ParkingDTO getParkingByNumPlace(int numPlace);
+
+  }
