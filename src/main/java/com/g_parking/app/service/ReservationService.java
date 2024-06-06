@@ -1,6 +1,5 @@
 package com.g_parking.app.service;
 
-import com.g_parking.app.dto.FactureDTO;
 import com.g_parking.app.dto.ReservationDTO;
 
 public interface ReservationService {

@@ -2,23 +2,23 @@ package com.g_parking.app.dto;
 
 public class AuthenticationDTO {
 
-  private String username;
+  private String email;
 
-  private String Password;
+  private String password;
 
   public String getPassword() {
-    return Password;
+    return password;
   }
 
   public void setPassword(String password) {
-    Password = password;
+    this.password = password;
   }
 
-  public String getUsername() {
-    return username;
+  public String getEmail() {
+    return email;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setEmail(String email) {
+    this.email = email;
   }
 }

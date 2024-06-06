@@ -20,6 +20,7 @@ public class ParkingEntity implements Serializable {
   private Long id;
 
  // @NotNull
+ // @Column(unique = true)
   private int numPlace;
 
  // @NotNull

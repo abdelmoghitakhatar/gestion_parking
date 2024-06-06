@@ -1,12 +1,14 @@
 package com.g_parking.app.service.serviceImpl;
 
 import com.g_parking.app.domain.VehicleEntity;
+import com.g_parking.app.domain.enumeration.ErrorMessage;
 import com.g_parking.app.dto.UserDTO;
 import com.g_parking.app.dto.VehicleDTO;
 import com.g_parking.app.repository.UserRepository;
 import com.g_parking.app.repository.VehicleRepository;
 import com.g_parking.app.service.VehicleService;
 import com.g_parking.app.service.mapper.VehicleMapper;
+import com.g_parking.app.web.exceptions.VehicleException;
 import com.g_parking.app.web.utils.UserUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,12 +22,12 @@ import java.util.Set;
 public class VehicleServiceImpl implements VehicleService {
 
   private final UserUtils userUtils;
-  private VehicleRepository vehicleRepository;
-  private VehicleMapper vehicleMapper;
+  private final VehicleRepository vehicleRepository;
+  private final VehicleMapper vehicleMapper;
 
     public VehicleServiceImpl(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper, UserUtils userUtils) {
       this.vehicleRepository = vehicleRepository;
-        this.vehicleMapper = vehicleMapper;
+      this.vehicleMapper = vehicleMapper;
       this.userUtils = userUtils;
     }
 
@@ -36,25 +38,31 @@ public class VehicleServiceImpl implements VehicleService {
 
       vehicleDTO.setUser(userDTO);
 
-        VehicleEntity vehicle = vehicleMapper.toEntity(vehicleDTO);
-        vehicle = vehicleRepository.save(vehicle);
-        return vehicleMapper.toDto(vehicle);
+      return vehicleMapper.toDto(
+        vehicleRepository.save(
+          vehicleMapper.toEntity(vehicleDTO)
+        )
+      );
     }
 
     @Override
-    public VehicleDTO updateVehicle(VehicleDTO vehicleDTO) {
+    public VehicleDTO updateVehicle(VehicleDTO vehicleDTO) throws VehicleException {
+      if(getVehicleByMatricule(vehicleDTO.getMatricule()) == null){
+        throw new VehicleException(ErrorMessage.VEHICLE_NOT_FOUND.getMessage());
+      }
 
-      VehicleEntity vehicle = vehicleMapper.toEntity(vehicleDTO);
-      vehicle = vehicleRepository.save(vehicle);
-      return vehicleMapper.toDto(vehicle);
+      return vehicleMapper.toDto(
+        vehicleRepository.save(
+          vehicleMapper.toEntity(vehicleDTO)
+        )
+      );
     }
 
     @Override
     public VehicleDTO getVehicleByMatricule(String matricule) {
 
       Optional<VehicleEntity> vehicle = vehicleRepository.findVehicleEntityByMatricule(matricule);
-      return vehicle.map(vehicleEntity -> vehicleMapper.toDto(vehicleEntity)).orElse(null);
-
+      return vehicle.map(vehicleMapper::toDto).orElse(null);
     }
 
     @Override
@@ -63,7 +71,11 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public void removeVehicle(String matricule) {
+    public void removeVehicle(String matricule) throws VehicleException {
+      VehicleDTO vehicle = getVehicleByMatricule(matricule);
+      if(vehicle == null){
+        throw new VehicleException(ErrorMessage.VEHICLE_NOT_FOUND.getMessage());
+      }
         vehicleRepository.deleteByMatricule(matricule);
     }
 }

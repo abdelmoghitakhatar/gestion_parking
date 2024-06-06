@@ -16,8 +16,10 @@ public interface ParkingRepository extends JpaRepository<ParkingEntity, Long> {
     "FROM ParkingEntity p " +
     "WHERE p.id NOT IN " +
     " (SELECT r.parking.id FROM ReservationEntity r " +
-    "WHERE (r.dateDebut <= :dateDebut AND r.dateFin >= :dateDebut) " +
-    "OR (r.dateDebut <= :dateFin AND r.dateFin >= :dateFin))")
+    "WHERE ((r.dateDebut <= :dateDebut AND r.dateFin >= :dateDebut) " +
+    "OR (r.dateDebut <= :dateFin AND r.dateFin >= :dateFin))" +
+    "AND (r.canceled = false AND r.facture != null)" +
+    ")")
   Set<ParkingEntity> getPlacesByTime(@Param("dateDebut")LocalDateTime dateDebut, @Param("dateFin")LocalDateTime dateFin);
 
    void deleteByNumPlace(int numPlace);

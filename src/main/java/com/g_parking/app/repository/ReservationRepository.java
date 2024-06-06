@@ -18,6 +18,6 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
   @Query("UPDATE ReservationEntity r SET r.canceled = true WHERE r.numReservation = :num")
   void annulerReservation(@Param("num") String numReservation);
 
-  @Query("SELECT MAX(r.numReservation) FROM ReservationEntity r WHERE r.numReservation = :pattern")
+  @Query("SELECT MAX(r.numReservation) FROM ReservationEntity r WHERE r.numReservation LIKE :pattern")
   Optional<String> getMaxNumeroReservation(@Param("pattern") String pattern);
 }

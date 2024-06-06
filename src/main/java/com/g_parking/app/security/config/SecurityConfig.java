@@ -1,6 +1,6 @@
 package com.g_parking.app.security.config;
 
-import com.g_parking.app.security.jwt.JwtAuthenticationEntryPoint;
+//import com.g_parking.app.security.jwt.JwtAuthenticationEntryPoint;
 import com.g_parking.app.security.jwt.JwtAuthenticationFilter;
 import com.g_parking.app.security.jwt.JwtProvider;
 import org.springframework.context.annotation.Bean;
@@ -23,12 +23,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-  private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+//  private final JwtAuthenticationEntryPoint authenticationEntryPoint;
   private final JwtProvider jwtProvider;
   private final UserDetailsService userDetailsService;
 
-  public SecurityConfig(JwtAuthenticationEntryPoint authenticationEntryPoint, JwtProvider jwtProvider, UserDetailsService userDetailsService) {
-    this.authenticationEntryPoint = authenticationEntryPoint;
+  public SecurityConfig(/*JwtAuthenticationEntryPoint authenticationEntryPoint,*/ JwtProvider jwtProvider, UserDetailsService userDetailsService) {
+//    this.authenticationEntryPoint = authenticationEntryPoint;
     this.jwtProvider = jwtProvider;
     this.userDetailsService = userDetailsService;
   }

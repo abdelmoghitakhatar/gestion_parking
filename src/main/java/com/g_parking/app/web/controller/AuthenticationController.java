@@ -1,12 +1,15 @@
 package com.g_parking.app.web.controller;
 
 import com.g_parking.app.domain.UserEntity;
+import com.g_parking.app.domain.enumeration.ErrorMessage;
 import com.g_parking.app.dto.AuthenticationDTO;
 import com.g_parking.app.dto.UserDTO;
 import com.g_parking.app.dto.customResponse.UserResponse;
 import com.g_parking.app.security.config.SecurityConstants;
 import com.g_parking.app.service.AuthenticationService;
 import com.g_parking.app.service.UserService;
+import com.g_parking.app.web.exceptions.AuthenticationException;
+import com.g_parking.app.web.exceptions.UserException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,13 +41,14 @@ public class AuthenticationController {
   }
 
   @PostMapping("/signup")
-  public UserResponse signup(@RequestBody UserDTO userDTO){
+  public ResponseEntity<UserResponse> signup(@RequestBody UserDTO userDTO) throws UserException{
     if(userDTO.getId() != null) {
-      throw new RuntimeException("User not accepted");
+      throw new UserException(ErrorMessage.UNACCEPTED_USER.getMessage());
     }
     if(userService.findUserByEmail(userDTO.getEmail()) != null){
+      // TODO : adapt validation exception - especially already exists rows error
       throw new RuntimeException("User already exists");
     }
-    return userService.addUser(userDTO);
+    return new ResponseEntity<>(userService.addUser(userDTO), HttpStatus.CREATED);
   }
 }
