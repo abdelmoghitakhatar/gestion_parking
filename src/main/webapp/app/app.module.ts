@@ -27,7 +27,7 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
         NgOptimizedImage,
         HttpClientModule,
         BrowserAnimationsModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
     ],
   providers: [
     Title,

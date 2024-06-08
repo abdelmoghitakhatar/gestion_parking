@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit{
   loadPlaces(): void {
     this.parkingService.get()
       .subscribe({
-        next: value => this.parkings = value,
+        next: response => this.parkings = response,
         error: () => alert(`There is an Error, Please Try Later`)
       })
   }

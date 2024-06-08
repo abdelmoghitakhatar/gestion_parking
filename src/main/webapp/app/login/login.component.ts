@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {LoginModel} from "./login.model";
 import {LoginService} from "./login.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: "login",
@@ -9,9 +9,20 @@ import {LoginService} from "./login.service";
 })
 export class LoginComponent implements OnInit {
 
-  info: LoginModel = new LoginModel();
-
-  jwt: string = "";
+  loginForm: FormGroup = new FormGroup({
+    email: new FormControl(null, {
+      validators: [
+        Validators.email,
+        Validators.required
+      ]
+    }),
+    password: new FormControl(null, {
+      validators: [
+        Validators.required,
+        Validators.minLength(8)
+      ]
+    }),
+  })
 
   constructor(
     private loginService: LoginService
@@ -21,17 +32,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.loginService.login(this.info).subscribe({
-      next: response => this.jwt = response,
-      error: () => alert("Erreur d'authentification\nVérifier email et password")
-    });
-  }
-
-  isFormValid(): boolean{
-    return (
-      !this.info.username || !this.info.password
-
-    )
+    this.loginService.login(this.loginForm.value).subscribe({
+      next: response => console.log(response),
+      error: erreur => alert(erreur.message)
+    })
   }
 
 }

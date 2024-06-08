@@ -1,57 +1,106 @@
-<section class="vh-80 gradient-custom">
-  <div class="container py-5 h-80">
+<section class="vh-80">
+  <div class="container py-4 h-80">
     <div class="row justify-content-center align-items-center h-80">
       <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-          <div class="card-body p-4 p-md-5">
-            <h3 class="mb-2 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-            <form (ngSubmit)="register()">
+        <div class="card shadow-2-strong card-registration gradient-custom" style="border-radius: 15px;">
+          <div class="card-body p-3 p-md-4">
+            <h2 class="mb-2 pb-2 pb-md-0 mb-md-3 text-center fw-bolder text-info-emphasis">Inscrivez-vous :</h2>
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
 
               <div class="row">
 
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6 mb-2 pb-2">
                   <div data-mdb-input-init class="form-outline">
                     <label class="form-label" for="firstName">Prénom :</label>
                     <input
                       type="text"
                       id="firstName"
                       class="form-control form-control-lg"
-                      required
-                      [(ngModel)]="user.firstName"
-                      [ngModelOptions]="{standalone: true}"
+                      formControlName="firstName"
                     />
                   </div>
+                  <ng-container *ngIf="registerForm.get('firstName')?.touched">
+                    <small
+                      *ngIf="registerForm.get('firstName')?.getError('required')"
+                      class="text-danger"
+                    >
+                      ce champs est obligatoire.
+                    </small>
+                    <small
+                      *ngIf="registerForm.get('firstName')?.getError('maxlength')"
+                      class="text-danger"
+                    >
+                      prénom doit contient moins de 25 caractères.
+                    </small>
+                    <small
+                      *ngIf="registerForm.get('firstName')?.dirty && registerForm.get('firstName')?.getError('minlength')"
+                      class="text-danger"
+                    >
+                      prénom doit contient plus de 3 caractères.
+                    </small>
+                  </ng-container>
                 </div>
 
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6 mb-2 pb-2">
                   <div data-mdb-input-init class="form-outline">
                     <label class="form-label" for="lastName">Nom :</label>
                     <input
                       type="text"
                       id="lastName"
                       class="form-control form-control-lg"
-                      required
-                      [(ngModel)]="user.lastName"
-                      [ngModelOptions]="{standalone: true}"
+                      formControlName="lastName"
                     />
                   </div>
+                  <ng-container *ngIf="registerForm.get('lastName')?.touched">
+                    <small
+                      *ngIf="registerForm.get('lastName')?.getError('required')"
+                      class="text-danger"
+                    >
+                      ce champs est obligatoire.
+                    </small>
+                    <small
+                      *ngIf="registerForm.get('lastName')?.getError('maxlength')"
+                      class="text-danger"
+                    >
+                      nom doit contient moins de 25 caractères.
+                    </small>
+                    <small
+                      *ngIf="registerForm.get('lastName')?.dirty && registerForm.get('lastName')?.getError('minlength')"
+                      class="text-danger"
+                    >
+                      nom doit contient plus de 3 caractères.
+                    </small>
+                  </ng-container>
                 </div>
 
               </div>
 
               <div class="row">
 
-                <div class="col-md-6 mb-2 d-flex align-items-center">
+                <div class="col-md-6 mb-2 pb-2">
                   <div data-mdb-input-init class="form-outline datepicker w-100">
                     <label for="email" class="form-label">Email :</label>
                     <input
                       type="email"
                       class="form-control form-control-lg"
-                      id="email" required
-                      [(ngModel)]="user.email"
-                      [ngModelOptions]="{standalone: true}"
+                      id="email"
+                      formControlName="email"
                     />
                   </div>
+                  <ng-container *ngIf="registerForm.get('email')?.touched">
+                    <small
+                      *ngIf="registerForm.get('email')?.getError('required')"
+                      class="text-danger"
+                    >
+                      ce champs est obligatoire.
+                    </small>
+                    <small
+                      *ngIf="registerForm.get('email')?.dirty && registerForm.get('email')?.getError('email')"
+                      class="text-danger"
+                    >
+                      ce champs doit être email.
+                    </small>
+                  </ng-container>
                 </div>
 
                 <div class="col-md-6 mb-2 pb-2">
@@ -61,11 +110,23 @@
                       type="password"
                       id="password"
                       class="form-control form-control-lg"
-                      required
-                      [(ngModel)]="user.password"
-                      [ngModelOptions]="{standalone: true}"
+                      formControlName="password"
                     />
                   </div>
+                  <ng-container *ngIf="registerForm.get('password')?.touched">
+                    <small
+                      *ngIf="registerForm.get('password')?.getError('required')"
+                      class="text-danger"
+                    >
+                      ce champs est obligatoire.
+                    </small>
+                    <small
+                      *ngIf="registerForm.get('password')?.dirty && registerForm.get('password')?.getError('minlength')"
+                      class="text-danger"
+                    >
+                      mot de passe doit contient plus de 8 caractères.
+                    </small>
+                  </ng-container>
                 </div>
 
               </div>
@@ -79,9 +140,7 @@
                       type="text"
                       id="Address"
                       class="form-control form-control-lg"
-                      required
-                      [(ngModel)]="user.address"
-                      [ngModelOptions]="{standalone: true}"
+                      formControlName="address"
                     />
                   </div>
                 </div>
@@ -93,20 +152,37 @@
                       type="tel"
                       id="phoneNumber"
                       class="form-control form-control-lg"
-                      required
-                      [(ngModel)]="user.phone"
-                      [ngModelOptions]="{standalone: true}"
+                      formControlName="phone"
                     />
                   </div>
+                  <ng-container *ngIf="registerForm.get('phone')?.touched">
+                    <small
+                      *ngIf="registerForm.get('phone')?.getError('required')"
+                      class="text-danger"
+                    >
+                      ce champs est obligatoire.
+                    </small>
+                    <small
+                      *ngIf="registerForm.get('phone')?.dirty && registerForm.get('phone')?.getError('pattern')"
+                      class="text-danger"
+                    >
+                      numéro de téléphone non valide.
+                    </small>
+                  </ng-container>
                 </div>
 
               </div>
 
-              <div class="mt-4 d-grid">
-                <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Register" [disabled]="isFormValid()"/>
+              <div class="mt-1 d-grid">
+                <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Créer un compte" [disabled]="registerForm.invalid"/>
               </div>
-
             </form>
+
+            <div class="mt-3 text-center">
+              <small>
+                Vous avais déjà un compte? <a routerLink="/login" class="text-primary-emphasis fw-semibold">connecter-vous.</a>
+              </small>
+            </div>
           </div>
         </div>
       </div>

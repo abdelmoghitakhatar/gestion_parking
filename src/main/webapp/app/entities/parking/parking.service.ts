@@ -13,10 +13,8 @@ export class ParkingService {
   ){}
 
   get(): Observable<ParkingModel[]>{
-    let headers = new HttpHeaders()
-      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmRlbG1vZ2hpdC5ha2hhdGFyQGdtYWlsLmNvbSIsImlhdCI6MTcxNzA5Mjk0MSwiZXhwIjoxNzE3MTc5MzQxfQ.uXLVYwzjVJ2qIUWCtivSQvN4Q0iqprJCt_WUICiy1WOUqKhkMdLY21qgCzWv04076otNEGZbPyGQ9s1lcWpQvg');
     return this.http
-      .get<ParkingModel[]>(`${Constants.baseUrl}/parking`, {headers: headers});
+      .get<ParkingModel[]>(`${Constants.baseUrl}/parking`);
   }
 
 }

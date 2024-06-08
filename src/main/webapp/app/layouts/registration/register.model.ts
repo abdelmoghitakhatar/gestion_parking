@@ -1,17 +1,17 @@
-export class RegisterModel {
-  public firstName!: string
-  public lastName!: string
-  public password!: string
-  public email!: string
-  public phone!: string
-  public address!: string
+export interface RegisterModel {
+  firstName: string
+  lastName: string
+  password: string
+  email: string
+  phone: string
+  address: string
 }
 
-export class UserResponse {
-  public userName!: string
-  public firstName!: string
-  public lastName!: string
-  public email!: string
-  public reservations!: any
-  public vehicles!: any
+export interface UserResponse {
+  userName: string
+  firstName: string
+  lastName: string
+  email: string
+  reservations: any
+  vehicles: any
 }
