@@ -1,5 +1,6 @@
 package com.g_parking.app.dto;
 
+import com.g_parking.app.domain.enumeration.ErrorConstants;
 import com.g_parking.app.domain.enumeration.PermitsType;
 import jakarta.validation.constraints.NotNull;
 
@@ -15,10 +16,10 @@ public class ParkingDTO implements Serializable {
 
   private Long id;
 
- // @NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   private int numPlace;
 
- // @NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   private PermitsType typePlace;
 
   private Set<ReservationDTO> reservations = new HashSet<>();

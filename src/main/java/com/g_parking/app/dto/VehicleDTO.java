@@ -1,5 +1,6 @@
 package com.g_parking.app.dto;
 
+import com.g_parking.app.domain.enumeration.ErrorConstants;
 import com.g_parking.app.domain.enumeration.PermitsType;
 import com.g_parking.app.domain.enumeration.VehicleName;
 import jakarta.validation.constraints.NotNull;
@@ -9,21 +10,21 @@ import java.io.Serializable;
 
 public class VehicleDTO implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = -2954593831300966870L;
+  @Serial
+  private static final long serialVersionUID = -2954593831300966870L;
 
-    private Long id;
+  private Long id;
 
-  //  @NotNull
-    private String matricule;
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  private String matricule;
 
- //   @NotNull
-    private VehicleName vehicleName;
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  private VehicleName vehicleName;
 
- //   @NotNull
-    private PermitsType permitsType;
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  private PermitsType permitsType;
 
-    private UserDTO user;
+  private UserDTO user;
 
   public Long getId() {
     return id;

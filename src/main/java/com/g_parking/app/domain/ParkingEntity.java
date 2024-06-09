@@ -1,5 +1,6 @@
 package com.g_parking.app.domain;
 
+import com.g_parking.app.domain.enumeration.ErrorConstants;
 import com.g_parking.app.domain.enumeration.PermitsType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -19,13 +20,13 @@ public class ParkingEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
- // @NotNull
- // @Column(unique = true)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Column(unique = true, nullable = false)
   private int numPlace;
 
- // @NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   @Enumerated(EnumType.STRING)
- // @Column(nullable = false)
+  @Column(nullable = false)
   private PermitsType typePlace;
 
   @OneToMany(mappedBy = "parking")

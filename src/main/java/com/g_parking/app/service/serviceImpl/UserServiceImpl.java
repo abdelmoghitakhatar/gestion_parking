@@ -1,11 +1,13 @@
 package com.g_parking.app.service.serviceImpl;
 
+import com.g_parking.app.domain.enumeration.ErrorMessage;
 import com.g_parking.app.dto.customResponse.UserResponse;
 import com.g_parking.app.domain.UserEntity;
 import com.g_parking.app.dto.UserDTO;
 import com.g_parking.app.repository.UserRepository;
 import com.g_parking.app.service.UserService;
 import com.g_parking.app.service.mapper.UserMapper;
+import com.g_parking.app.web.exceptions.UserException;
 import com.g_parking.app.web.utils.UserUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +29,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserResponse addUser(UserDTO userDTO) {
+    public UserResponse addUser(UserDTO userDTO) throws UserException {
+
+      if(userRepository.findUserEntityByEmail(userDTO.getEmail()).isPresent()){
+        throw new UserException(ErrorMessage.EMAIL_ALREADY_EXISTS.getMessage());
+      }
+      if(userRepository.findUserEntityByPhone(userDTO.getPhone()).isPresent()){
+        throw new UserException(ErrorMessage.PHONE_ALREADY_EXISTS.getMessage());
+      }
 
         userDTO.setUserName(utils.generateUserId());
         userDTO.setPassword(utils.getHashedPassword(userDTO.getPassword()));

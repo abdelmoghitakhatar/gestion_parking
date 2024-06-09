@@ -2,6 +2,7 @@ package com.g_parking.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.g_parking.app.domain.enumeration.ErrorConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -20,31 +21,37 @@ public class UserEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
- // @NotNull
- // @Column(unique = true)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Column(unique = true, nullable = false)
   private String userName;
 
- // @Email
- // @NotNull
- // @Size(min = 5, max = 254)
- // @Column(unique = true)
+  @Email(message = ErrorConstants.EMAIL_ERROR)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Size(min = 5, message = ErrorConstants.MIN_ERROR)
+  @Size(max = 254, message = ErrorConstants.MAX_ERROR)
+  @Column(unique = true, nullable = false)
   private String email;
 
- // @NotNull
-//  @Size(min = 3, max = 25)
- private String firstName;
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Size(min = 3, message = ErrorConstants.MIN_ERROR)
+  @Size(max = 25, message = ErrorConstants.MAX_ERROR)
+  @Column(nullable = false)
+  private String firstName;
 
- // @NotNull
- // @Size(min = 3, max = 25)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Size(min = 3, message = ErrorConstants.MIN_ERROR)
+  @Size(max = 25, message = ErrorConstants.MAX_ERROR)
+  @Column(nullable = false)
   private String lastName;
 
- // @NotNull
- // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Column(nullable = false)
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
-  //@NotNull
-  //@Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$")
-  //@Column(unique = true)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$", message = ErrorConstants.PATTERN_ERROR)
+  @Column(unique = true, nullable = false)
   private String phone;
 
   private String address;

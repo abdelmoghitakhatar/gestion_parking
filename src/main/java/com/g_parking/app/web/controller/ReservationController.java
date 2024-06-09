@@ -4,6 +4,7 @@ import com.g_parking.app.domain.enumeration.ErrorMessage;
 import com.g_parking.app.dto.ReservationDTO;
 import com.g_parking.app.service.ReservationService;
 import com.g_parking.app.web.exceptions.ReservationException;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class ReservationController {
   }
 
   @PostMapping("/add")
-  public ResponseEntity<ReservationDTO> addReservation(@RequestBody ReservationDTO reservationDTO) throws ReservationException {
+  public ResponseEntity<ReservationDTO> addReservation(@RequestBody @Valid ReservationDTO reservationDTO) throws ReservationException {
     if(reservationDTO.getId() != null){
       throw new ReservationException(ErrorMessage.RESERVATION_NOT_ACCEPTED.getMessage());
     }
@@ -28,7 +29,7 @@ public class ReservationController {
   }
 
   @PostMapping("/add-payed")
-  public ResponseEntity<ReservationDTO> payReservation(@RequestBody ReservationDTO reservationDTO){
+  public ResponseEntity<ReservationDTO> payedReservation(@RequestBody @Valid ReservationDTO reservationDTO){
     if(reservationDTO.getId() != null){
       throw new ReservationException(ErrorMessage.RESERVATION_NOT_ACCEPTED.getMessage());
     }

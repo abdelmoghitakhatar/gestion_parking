@@ -1,6 +1,7 @@
 package com.g_parking.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.g_parking.app.domain.enumeration.ErrorConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -18,27 +19,31 @@ public class ReservationEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
- // @NotNull
- // @Column(unique = true)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Column(unique = true, nullable = false)
   private String numReservation;
 
- // @NotNull
+  @Column(nullable = false)
   private boolean canceled = false;
 
- // @NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Column(nullable = false)
   private LocalDateTime dateDebut;
 
- // @NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Column(nullable = false)
   private LocalDateTime dateFin;
 
   @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JsonIgnoreProperties(value = {"reservation"}, allowSetters = true)
   private FactureEntity facture;
 
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   @ManyToOne
   @JsonIgnoreProperties(value = {"reservations", "vehicles"})
   private UserEntity user;
 
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   @ManyToOne
   @JsonIgnoreProperties(value = {"reservations"}, allowSetters = true)
   private ParkingEntity parking;

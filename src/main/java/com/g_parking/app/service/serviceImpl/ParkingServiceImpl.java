@@ -1,10 +1,12 @@
 package com.g_parking.app.service.serviceImpl;
 
 import com.g_parking.app.domain.ParkingEntity;
+import com.g_parking.app.domain.enumeration.ErrorMessage;
 import com.g_parking.app.dto.ParkingDTO;
 import com.g_parking.app.repository.ParkingRepository;
 import com.g_parking.app.service.ParkingService;
 import com.g_parking.app.service.mapper.ParkingMapper;
+import com.g_parking.app.web.exceptions.ParkingException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,20 +49,31 @@ public class ParkingServiceImpl implements ParkingService {
   }
 
   @Override
-  public ParkingDTO addPlace(ParkingDTO parking) {
+  public ParkingDTO addPlace(ParkingDTO parking) throws ParkingException {
+
+    if(parkingRepository.findByNumPlace(parking.getNumPlace()) != null){
+      throw new ParkingException(ErrorMessage.NUM_PLACE_ALEADY_EXISTS.getMessage());
+    }
     ParkingEntity place = parkingMapper.toEntity(parking);
     place = parkingRepository.save(place);
     return parkingMapper.toDto(place);
   }
 
   @Override
-  public void removePlace(int numPlace) {
+  public void removePlace(int numPlace) throws ParkingException {
+
+    if(parkingRepository.findByNumPlace(numPlace) == null){
+      throw new ParkingException(ErrorMessage.PLACE_NOT_FOUND.getMessage());
+    }
     parkingRepository.deleteByNumPlace(numPlace);
   }
 
   @Override
-  public ParkingDTO updatePlace(ParkingDTO parking) {
+  public ParkingDTO updatePlace(ParkingDTO parking) throws ParkingException {
 
+    if(parkingRepository.findByNumPlace(parking.getNumPlace()) == null){
+      throw new ParkingException(ErrorMessage.PLACE_NOT_FOUND.getMessage());
+    }
     ParkingEntity place = parkingMapper.toEntity(parking);
     place = parkingRepository.save(place);
     return parkingMapper.toDto(place);

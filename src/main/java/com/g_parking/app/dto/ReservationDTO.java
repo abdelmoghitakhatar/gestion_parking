@@ -1,5 +1,6 @@
 package com.g_parking.app.dto;
 
+import com.g_parking.app.domain.enumeration.ErrorConstants;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
@@ -13,22 +14,21 @@ public class ReservationDTO implements Serializable {
 
   private Long id;
 
-  //@NotNull
   private String numReservation;
 
- // @NotNull
   private boolean canceled = false;
 
-  //@NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   private LocalDateTime dateDebut;
 
-  //@NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   private LocalDateTime dateFin;
 
   private FactureDTO facture;
 
   private UserDTO user;
 
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   private ParkingDTO parking;
 
   public Long getId() {

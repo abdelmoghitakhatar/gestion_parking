@@ -1,5 +1,6 @@
 package com.g_parking.app.dto;
 
+import com.g_parking.app.domain.enumeration.ErrorConstants;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -19,24 +20,27 @@ public class UserDTO implements Serializable {
 
   private String userName;
 
-//  @NotNull
- // @Email
-//  @Size(min = 5, max = 254)
+  @Email(message = ErrorConstants.EMAIL_ERROR)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Size(min = 5, message = ErrorConstants.MIN_ERROR)
+  @Size(max = 254, message = ErrorConstants.MAX_ERROR)
   private String email;
 
- // @NotNull
- // @Size(min = 3, max = 25)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Size(min = 3, message = ErrorConstants.MIN_ERROR)
+  @Size(max = 25, message = ErrorConstants.MAX_ERROR)
   private String firstName;
 
-  //@NotNull
- // @Size(min = 3, max = 25)
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Size(min = 3, message = ErrorConstants.MIN_ERROR)
+  @Size(max = 25, message = ErrorConstants.MAX_ERROR)
   private String lastName;
 
-//  @NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   private String password;
 
-//  @NotNull
-//  @Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$")
+  @NotNull(message = ErrorConstants.NULL_ERROR)
+  @Pattern(regexp = "^((\\+)212|0|00212)[5-8](\\d{2}){4}$", message = ErrorConstants.PATTERN_ERROR)
   private String phone;
 
   private String address;

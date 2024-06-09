@@ -10,6 +10,7 @@ import com.g_parking.app.service.AuthenticationService;
 import com.g_parking.app.service.UserService;
 import com.g_parking.app.web.exceptions.AuthenticationException;
 import com.g_parking.app.web.exceptions.UserException;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class AuthenticationController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestBody AuthenticationDTO user){
+  public ResponseEntity<String> login(@RequestBody @Valid AuthenticationDTO user){
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.set(
       SecurityConstants.AUTHORIZATION_HEADER,
@@ -41,13 +42,9 @@ public class AuthenticationController {
   }
 
   @PostMapping("/signup")
-  public ResponseEntity<UserResponse> signup(@RequestBody UserDTO userDTO) throws UserException{
+  public ResponseEntity<UserResponse> signup(@RequestBody @Valid UserDTO userDTO) throws UserException{
     if(userDTO.getId() != null) {
       throw new UserException(ErrorMessage.UNACCEPTED_USER.getMessage());
-    }
-    if(userService.findUserByEmail(userDTO.getEmail()) != null){
-      // TODO : adapt validation exception - especially already exists rows error
-      throw new RuntimeException("User already exists");
     }
     return new ResponseEntity<>(userService.addUser(userDTO), HttpStatus.CREATED);
   }

@@ -1,6 +1,7 @@
 package com.g_parking.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.g_parking.app.domain.enumeration.ErrorConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -18,15 +19,16 @@ public class FactureEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
- // @NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   private LocalDate dateFacture = LocalDate.now();
 
- // @NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   private String numeroFacture;
 
-  //@NotNull
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   private float montant;
 
+  @NotNull(message = ErrorConstants.NULL_ERROR)
   @OneToOne
   @JsonIgnoreProperties(value = {"facture"}, allowSetters = true)
   private ReservationEntity reservation;
