@@ -1,6 +1,5 @@
 package com.g_parking.app.web.controller;
 
-import com.g_parking.app.domain.UserEntity;
 import com.g_parking.app.domain.enumeration.ErrorMessage;
 import com.g_parking.app.dto.AuthenticationDTO;
 import com.g_parking.app.dto.UserDTO;
@@ -8,7 +7,6 @@ import com.g_parking.app.dto.customResponse.UserResponse;
 import com.g_parking.app.security.config.SecurityConstants;
 import com.g_parking.app.service.AuthenticationService;
 import com.g_parking.app.service.UserService;
-import com.g_parking.app.web.exceptions.AuthenticationException;
 import com.g_parking.app.web.exceptions.UserException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
