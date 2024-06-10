@@ -3,6 +3,7 @@ import {JwtToken, LoginService} from "./login.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TokenService} from "./token.service";
 import {MessageService} from "primeng/api";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "login",
@@ -31,7 +32,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private tokenService: TokenService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ){}
 
   ngOnInit(): void {
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
   authenticateSuccess({token}: JwtToken):void{
     if(token) {
       this.tokenService.handle(token);
+      this.router.navigate(['/']);
     }
   }
 

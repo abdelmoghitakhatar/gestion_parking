@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {LoginModel} from "./login.model";
 import {map, Observable, tap} from "rxjs";
-import {Constants} from "../core/Constants";
+import {Constants} from "../../core/Constants";
 
 export type JwtToken = {
   token?: string;

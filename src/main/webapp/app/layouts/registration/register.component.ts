@@ -3,6 +3,7 @@ import {RegisterModel, UserResponse} from "./register.model";
 import {RegisterService} from "./register.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "signup",
@@ -13,7 +14,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     public registerService: RegisterService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ){}
 
   registerForm: FormGroup = new FormGroup({
@@ -59,19 +61,24 @@ export class RegisterComponent implements OnInit {
   register(): void {
     this.registerService.signup(this.registerForm.value)
       .subscribe({
-        next :response => alert("register successful"),
+        next :response => this.registerSuccess(),
         error: error => {
-          this.showToast(error.error)
+          this.showToast(error.error, 'error')
         }
       });
   }
 
-  showToast(error: any) {
+  registerSuccess():void{
+    this.showToast({message: 'register successful'}, 'success');
+    this.router.navigateByUrl('/login');
+  }
+
+  showToast(object: any, status: 'error'|'success'):void {
     this.messageService.add(
       {
-        severity: 'error',
-        summary: 'Erreur',
-        detail: error.message
+        severity: status,
+        summary: status,
+        detail: object.message
       }
     );
   }
