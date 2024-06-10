@@ -32,7 +32,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
       );
       SecurityContextHolder.getContext().setAuthentication(authentication);
       return jwtProvider.generateToken(authentication);
+    } else {
+      throw new CustomAuthenticationException(ErrorMessage.NULL_EMAIL_OR_PASSWORD.getMessage());
     }
-    throw new CustomAuthenticationException(ErrorMessage.NULL_EMAIL_OR_PASSWORD.getMessage());
   }
 }

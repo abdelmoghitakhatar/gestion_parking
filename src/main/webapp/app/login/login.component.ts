@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
-import {LoginService} from "./login.service";
+import {JwtToken, LoginService} from "./login.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {TokenService} from "./token.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: "login",
@@ -22,10 +24,14 @@ export class LoginComponent implements OnInit {
         Validators.minLength(8)
       ]
     }),
-  })
+  });
+
+  errorLogin: boolean = false;
 
   constructor(
-    private loginService: LoginService
+    private loginService: LoginService,
+    private tokenService: TokenService,
+    private messageService: MessageService
   ){}
 
   ngOnInit(): void {
@@ -33,9 +39,28 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.loginService.login(this.loginForm.value).subscribe({
-      next: response => console.log(response),
-      error: erreur => alert(erreur.message)
+      next: response => this.authenticateSuccess(response),
+      error: error => {
+        this.errorLogin = true;
+        this.showToast(error.error)
+      }
     })
+}
+
+  authenticateSuccess({token}: JwtToken):void{
+    if(token) {
+      this.tokenService.handle(token);
+    }
+  }
+
+  showToast(error: any) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: 'Erreur',
+        detail: error.message
+      }
+    );
   }
 
 }

@@ -1,8 +1,12 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {LoginModel} from "./login.model";
-import {Observable} from "rxjs";
+import {map, Observable, tap} from "rxjs";
 import {Constants} from "../core/Constants";
+
+export type JwtToken = {
+  token?: string;
+};
 
 @Injectable({
   providedIn: "root"
@@ -14,9 +18,9 @@ export class LoginService {
   ) {
   }
 
-  login(info: LoginModel): Observable<string>{
+  login(info: LoginModel): Observable<JwtToken>{
     return this.http
-      .post<string>(`${Constants.baseUrl}/login`, info);
+      .post<HttpResponse<JwtToken>>(`${Constants.baseUrl}/login`, info, {observe: "response"})
+      .pipe(map(res => res.body ?? {}));
   }
-
 }

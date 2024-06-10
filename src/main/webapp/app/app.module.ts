@@ -19,16 +19,16 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
     NavbarComponent,
     FooterComponent
   ],
-    imports: [
-        BrowserModule,
-        HomeModule,
-        AppRoutingModule,
-        SharedModule,
-        NgOptimizedImage,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        NoopAnimationsModule,
-    ],
+  imports: [
+    BrowserModule,
+    HomeModule,
+    AppRoutingModule,
+    SharedModule,
+    NgOptimizedImage,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+  ],
   providers: [
     Title,
     { provide: LOCALE_ID, useValue: 'fr' },

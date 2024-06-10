@@ -14,7 +14,7 @@ export class ParkingService {
 
   get(): Observable<ParkingModel[]>{
     return this.http
-      .get<ParkingModel[]>(`${Constants.baseUrl}/parking`);
+      .get<ParkingModel[]>(`${Constants.baseUrl}/parking/all`);
   }
 
 }

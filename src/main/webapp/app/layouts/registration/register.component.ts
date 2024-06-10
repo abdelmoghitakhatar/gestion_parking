@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {RegisterModel, UserResponse} from "./register.model";
 import {RegisterService} from "./register.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: "signup",
@@ -11,7 +12,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class RegisterComponent implements OnInit {
 
   constructor(
-    public registerService: RegisterService
+    public registerService: RegisterService,
+    private messageService: MessageService
   ){}
 
   registerForm: FormGroup = new FormGroup({
@@ -58,8 +60,20 @@ export class RegisterComponent implements OnInit {
     this.registerService.signup(this.registerForm.value)
       .subscribe({
         next :response => alert("register successful"),
-        error: erreur => alert(erreur.message)
-  });
+        error: error => {
+          this.showToast(error.error)
+        }
+      });
+  }
+
+  showToast(error: any) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: 'Erreur',
+        detail: error.message
+      }
+    );
   }
 
 }

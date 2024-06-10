@@ -3,6 +3,7 @@ package com.g_parking.app.web.controller;
 import com.g_parking.app.domain.enumeration.ErrorMessage;
 import com.g_parking.app.dto.AuthenticationDTO;
 import com.g_parking.app.dto.UserDTO;
+import com.g_parking.app.dto.customResponse.JWTTokenResponse;
 import com.g_parking.app.dto.customResponse.UserResponse;
 import com.g_parking.app.security.config.SecurityConstants;
 import com.g_parking.app.service.AuthenticationService;
@@ -30,13 +31,14 @@ public class AuthenticationController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestBody @Valid AuthenticationDTO user){
+  public ResponseEntity<JWTTokenResponse> login(@RequestBody @Valid AuthenticationDTO user){
     HttpHeaders httpHeaders = new HttpHeaders();
+    String token = authenticationService.authenticate(user);
     httpHeaders.set(
       SecurityConstants.AUTHORIZATION_HEADER,
-      SecurityConstants.PREFIX_TOKEN + authenticationService.authenticate(user)
+      SecurityConstants.PREFIX_TOKEN + token
     );
-    return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
+    return new ResponseEntity<>(new JWTTokenResponse(token), httpHeaders, HttpStatus.OK);
   }
 
   @PostMapping("/signup")
