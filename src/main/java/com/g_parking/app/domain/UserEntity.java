@@ -47,7 +47,6 @@ public class UserEntity implements Serializable {
   @NotNull(message = ErrorConstants.NULL_ERROR)
   @Size(min = 8, message = ErrorConstants.MIN_ERROR)
   @Column(nullable = false)
-  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
   @NotNull(message = ErrorConstants.NULL_ERROR)

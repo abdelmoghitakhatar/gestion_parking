@@ -50,6 +50,7 @@ public class SecurityConfig {
           auth -> auth
             .requestMatchers(HttpMethod.POST, "/signup").permitAll()
             .requestMatchers(HttpMethod.POST, "/login").permitAll()
+            .requestMatchers(HttpMethod.GET, "/parking/all").permitAll()
             .anyRequest().authenticated()
         )
         .httpBasic(Customizer.withDefaults())

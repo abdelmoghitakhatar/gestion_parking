@@ -1,7 +1,9 @@
-import {TypePlace} from "../enumerations/type-place.model";
+import { TypePlace } from "../enumerations/type-place.model";
+import { ReservationModel } from "../reservation/reservation.model";
 
-export class ParkingModel {
-  public id?: number
-  public numPlace?: number
-  public typePlace?: TypePlace
+export interface ParkingModel {
+  id?: number
+  numPlace?: number
+  typePlace?: TypePlace
+  reservations?: ReservationModel[]
 }

@@ -18,15 +18,10 @@ public class UserResponse implements Serializable {
 
     private String userName;
 
-  //  @NotNull
     private String email;
 
- //   @NotNull
-  //  @Size(min = 3, max = 25)
     private String firstName;
 
- //   @NotNull
-  //  @Size(min = 3, max = 25)
     private String lastName;
 
     private Set<VehicleDTO> vehicles = new HashSet<>();

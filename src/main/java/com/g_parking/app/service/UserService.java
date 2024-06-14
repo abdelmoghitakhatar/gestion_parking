@@ -11,4 +11,6 @@ public interface UserService {
 
     UserResponse getConnectedUser();
 
+    UserDTO getProfile();
+
 }

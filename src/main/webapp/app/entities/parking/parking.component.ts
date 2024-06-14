@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {ParkingModel} from "./parking.model";
+import { Component, Input } from "@angular/core";
+import { ParkingModel } from "./parking.model";
 
 @Component({
   selector: 'parking',
@@ -8,7 +8,7 @@ import {ParkingModel} from "./parking.model";
 })
 export class ParkingComponent {
 
-  @Input('parking') parking: ParkingModel = new ParkingModel();
+  @Input('parking') parking!: ParkingModel;
   @Input('auth') isAuthenticated: boolean = false;
 
   protected readonly alert = alert;

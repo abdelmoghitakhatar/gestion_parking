@@ -12,7 +12,9 @@ import com.g_parking.app.web.utils.UserUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -66,5 +68,24 @@ public class UserServiceImpl implements UserService{
 
     UserResponse response = new UserResponse();
     return response.dtoToResponse(user);
+  }
+
+  @Override
+  public UserDTO getProfile() {
+
+    UserDTO user = utils.getConnectedUser();
+    user.setReservations(
+      user.getReservations()
+        .stream()
+        // .filter(
+        //   reservation -> (
+        //     !reservation.isCanceled() &&
+        //     reservation.getFacture() != null &&
+        //     reservation.getDateFin().isAfter(LocalDateTime.now())
+        //   )
+        // )
+        .collect(Collectors.toSet())
+    );
+    return user;
   }
 }

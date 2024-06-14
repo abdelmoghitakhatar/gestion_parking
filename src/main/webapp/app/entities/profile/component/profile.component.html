@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="mt-3 mx-auto" style="width: 65%">
+    <form [formGroup]="profileForm" class="mt-3">
+      <p-card header="Profile">
+        <ng-template pTemplate="body">
+          <div class="mb-2">
+            <label for="username">Nom d'utilisateur :</label>
+            <input
+              id="username"
+              pInputText
+              class="form-control"
+              type="text"
+              formControlName="userName"
+            >
+          </div>
+          <div class="mb-2">
+            <label for="firstname">Prénom :</label>
+            <input
+              id="firstname"
+              pInputText
+              class="form-control"
+              type="text"
+              formControlName="firstName"
+            >
+          </div>
+          <div class="mb-2">
+            <label for="lastname">Nom :</label>
+            <input
+              id="lastname"
+              pInputText
+              class="form-control"
+              type="text"
+              formControlName="lastName"
+            >
+          </div>
+          <div class="mb-2">
+            <label for="email">E-mail :</label>
+            <input
+              id="email"
+              pInputText
+              class="form-control"
+              type="text"
+              formControlName="email"
+            >
+          </div>
+          <div class="mb-2">
+            <label for="phone">Numéro de Téléphone :</label>
+            <input
+              id="phone"
+              pInputText
+              class="form-control"
+              type="text"
+              formControlName="phone"
+            >
+          </div>
+          <div class="mb-2">
+            <label for="address">Adresse :</label>
+            <input
+              id="address"
+              pInputText
+              class="form-control"
+              type="text"
+              formControlName="address"
+            >
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div formArrayName="reservations">
+            <div *ngFor="let reservation of reservations.controls; let i = index" class="mb-3">
+              <p-panel 
+                header="Réservation : {{i+1}}"
+                [formGroupName]="i"
+                [toggleable]="true"
+                >
+                <div class="mb-2">
+                  <label for="numReservation">Numéro de Reservation :</label>
+                  <input
+                    id="numReservation"
+                    pInputText
+                    class="form-control"
+                    type="text"
+                    formControlName="numReservation"
+                  >
+                </div>
+                <div class="mb-2">
+                  <label for="canceled">Annulé :</label>
+                  <input
+                    id="canceled"
+                    pInputText
+                    class="form-control"
+                    type="text"
+                    formControlName="canceled"
+                  >
+                </div>
+                <div class="mb-2">
+                  <label for="dateDebut">Date de Début :</label>
+                  <input
+                    id="dateDebut"
+                    pInputText
+                    class="form-control"
+                    type="text"
+                    formControlName="dateDebut"
+                  >
+                </div>
+                <div class="mb-2">
+                  <label for="dateFin">Date de Fin :</label>
+                  <input
+                    id="dateFin"
+                    pInputText
+                    class="form-control"
+                    type="text"
+                    formControlName="dateFin"
+                  >
+                </div>
+                <div class="mb-2" formGroupName="facture">
+                  <label for="numeroFacture">Facture N°:</label>
+                  <input
+                    id="numeroFacture"
+                    pInputText
+                    class="form-control"
+                    type="text"
+                    formControlName="numeroFacture"
+                  >
+                </div>
+                <div class="mb-2" formGroupName="parking">
+                  <label for="parking">Parking N°:</label>
+                  <input
+                    id="parking"
+                    pInputText
+                    class="form-control"
+                    type="text"
+                    formControlName="numPlace"
+                  >
+                </div>
+              </p-panel>
+            </div>
+          </div>
+        </ng-template>
+      </p-card>
+    </form>
+  </div>
+</div>
+
+
+
+

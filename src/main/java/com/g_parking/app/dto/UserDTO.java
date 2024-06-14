@@ -1,5 +1,6 @@
 package com.g_parking.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.g_parking.app.domain.enumeration.ErrorConstants;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -37,6 +38,7 @@ public class UserDTO implements Serializable {
   private String lastName;
 
   @NotNull(message = ErrorConstants.NULL_ERROR)
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
   @NotNull(message = ErrorConstants.NULL_ERROR)
