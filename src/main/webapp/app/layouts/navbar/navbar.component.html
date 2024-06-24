@@ -7,20 +7,31 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul *ngIf="currentUser" class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/profile">profile</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/login">login</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/signup">signup</a>
         </li>
         <li class="nav-item">
+          <button class="nav-link" (click)="logout()">log out</button>
+        </li> -->
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li *ngIf="!currentUser" class="nav-item">
+          <a class="nav-link" routerLink="/login">login</a>
+        </li>
+        <li *ngIf="!currentUser" class="nav-item">
+          <a class="nav-link" routerLink="/signup">signup</a>
+        </li>
+        <li *ngIf="currentUser" class="nav-item">
           <button class="nav-link" (click)="logout()">log out</button>
         </li>
       </ul>

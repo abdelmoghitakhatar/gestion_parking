@@ -1,6 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {ParkingModel} from "../../entities/parking/parking.model";
-import {ParkingService} from "../../entities/parking/parking.service";
+import { Component, OnInit } from "@angular/core";
+import { ParkingModel } from "../../entities/parking/parking.model";
+import { ParkingService } from "../../entities/parking/parking.service";
+import { AccountService } from "../login/account.service";
 
 @Component({
   selector: "home",
@@ -10,13 +11,15 @@ import {ParkingService} from "../../entities/parking/parking.service";
 export class HomeComponent implements OnInit{
 
   parkings?: ParkingModel[];
+  authenticated!: boolean;
 
   constructor(
-    private parkingService: ParkingService
+    private parkingService: ParkingService,
+    private accountService: AccountService
   ) {
   }
-
   ngOnInit(): void {
+    this.accountService.authStatus.subscribe(value => this.authenticated = value)
     this.loadPlaces()
   }
 

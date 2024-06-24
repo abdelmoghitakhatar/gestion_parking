@@ -1,9 +1,10 @@
-import {Component, OnInit} from "@angular/core";
-import {JwtToken, LoginService} from "./login.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TokenService} from "./token.service";
-import {MessageService} from "primeng/api";
-import {Router} from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { MessageService } from "primeng/api";
+import { AccountService } from "./account.service";
+import { JwtToken, LoginService } from "./login.service";
+import { TokenService } from "./token.service";
 
 @Component({
   selector: "login",
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
   errorLogin: boolean = false;
 
   constructor(
+    private accountService: AccountService,
     private loginService: LoginService,
     private tokenService: TokenService,
     private messageService: MessageService,
@@ -52,7 +54,8 @@ export class LoginComponent implements OnInit {
   authenticateSuccess({token}: JwtToken):void{
     if(token) {
       this.tokenService.handle(token);
-      this.router.navigate(['/']);
+      this.accountService.changeStatus(true);
+      this.router.navigateByUrl('/');
     }
   }
 

@@ -9,7 +9,7 @@ import { ParkingModel } from "./parking.model";
 export class ParkingComponent {
 
   @Input('parking') parking!: ParkingModel;
-  @Input('auth') isAuthenticated: boolean = false;
+  @Input('auth') isAuthenticated!: boolean;
 
   protected readonly alert = alert;
 }

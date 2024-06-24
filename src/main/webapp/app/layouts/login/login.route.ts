@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 
+import { LoginGuard } from '../guards/login-guard';
 import { LoginComponent } from './login.component';
 
 export const LOGIN_ROUTE: Route = {
@@ -7,5 +8,6 @@ export const LOGIN_ROUTE: Route = {
   component: LoginComponent,
   data: {
     title: 'login'
-  }
+  },
+  canActivate: [LoginGuard]
 };

@@ -1,5 +1,6 @@
-import {NgModule} from "@angular/core";
-import {RouterModule, Routes} from "@angular/router";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { AuthGuards } from "../layouts/guards/auth-guard";
 
 const routes: Routes = [
   {
@@ -7,6 +8,7 @@ const routes: Routes = [
     data: {
       title: 'profile',
     },
+    canActivate: [AuthGuards],
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
   }
 ]
